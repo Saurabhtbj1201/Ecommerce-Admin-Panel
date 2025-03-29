@@ -130,3 +130,52 @@ footer p {
 .footer-link:hover {
     color: #f1c40f;
 }
+
+/* Responsive styles for tablets */
+@media (max-width: 768px) {
+    .login-container {
+        width: 80%; /* Adjust width for smaller screens */
+        margin-top: 120px; /* Adjust margin for better spacing */
+    }
+
+    header .site-name-main {
+        font-size: 16px; /* Reduce font size */
+    }
+
+    header .site-name-sub {
+        font-size: 12px; /* Reduce font size */
+    }
+
+    input, button {
+        font-size: 14px; /* Adjust font size for inputs and buttons */
+    }
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 480px) {
+    .login-container {
+        width: 80%; /* Further reduce width for mobile */
+        padding: 15px; /* Adjust padding */
+    }
+
+    header .site-logo {
+        height: 30px; /* Reduce logo size */
+    }
+
+    header .site-name-main {
+        font-size: 14px; /* Further reduce font size */
+    }
+
+    header .site-name-sub {
+        font-size: 10px; /* Further reduce font size */
+    }
+
+    input, button {
+        font-size: 12px; /* Further adjust font size */
+        padding: 8px; /* Adjust padding */
+    }
+
+    .login-note {
+        font-size: 14px; /* Adjust note font size */
+    }
+}

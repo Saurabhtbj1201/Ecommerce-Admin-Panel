@@ -110,3 +110,143 @@ button.update {
     background-color: #28a745;
     color: white;
 }
+
+@media (max-width: 768px) {
+    body h1 {
+        font-size: 1.5em;
+    }
+
+    form {
+        width: 90%;
+        padding: 15px;
+    }
+
+    form input, form textarea, form button {
+        width: 85%;
+    }
+    
+    table img {
+        max-width: 50px;
+        max-height: 50px;
+        object-fit: cover;
+    }
+    table {
+        display: block;
+        width: 90%;
+        overflow-x: auto;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table tr {
+        display: block;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    table td:last-child {
+        border-bottom: none;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 10px;
+        color: #333;
+    }
+
+    .button-row {
+        flex-direction: row;
+        gap: 3px;
+    }
+
+    button {
+        width: 90%;
+    }
+
+    .table {
+        table-layout: fixed;
+    }
+}
+
+@media (max-width: 480px) {
+    body h1 {
+        font-size: 1em;
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    form {
+        padding: 8px;
+    }
+
+    form input, form textarea, form button {
+        width: 85%;
+    }
+
+    table {
+        display: block;
+        width: 90%;
+        overflow-x: auto;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table tr {
+        display: block;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    table td:last-child {
+        border-bottom: none;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 10px;
+        color: #333;
+    }
+
+    .button-row {
+        flex-direction: row;
+        gap: 3px;
+    }
+
+    button {
+        width: 90%;
+    }
+
+    .table {
+        table-layout: fixed;
+    }
+}

@@ -46,6 +46,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     font-size: 0.9rem;
     width: auto;
+    max-width: 100%; /* Ensure containers adapt to device width */
 }
 
 .satisfaction-score {
@@ -60,6 +61,7 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Ensure containers adapt to device width */
 }
 
 .browser ul {
@@ -85,6 +87,7 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Ensure containers adapt to device width */
 }
 
 .traffic-overview .chart-container {
@@ -94,6 +97,7 @@
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px; /* Add gap between sections */
+    max-width: 100%; /* Ensure containers adapt to device width */
 }
 
 .traffic-overview .chart-container canvas {
@@ -114,6 +118,7 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Ensure containers adapt to device width */
 }
 
 /* Additional Data */
@@ -132,4 +137,58 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Ensure containers adapt to device width */
+}
+
+/* Responsive styles for tablets */
+@media (max-width: 768px) {
+    .dashboard-overview {
+        flex-wrap: wrap; /* Allow cards to wrap */
+        gap: 10px; /* Adjust spacing */
+    }
+
+    .overview-card {
+        flex: 1 1 calc(50% - 10px); /* Two cards per row */
+    }
+
+    .dashboard-charts, .traffic-and-data {
+        flex-wrap: wrap; /* Allow charts to wrap */
+        gap: 10px; /* Adjust spacing */
+    }
+
+    .chart-container, .traffic-chart, .customer, .browser {
+        flex: 1 1 calc(50% - 10px); /* Two charts per row */
+        max-width: 100%; /* Ensure containers adapt to device width */
+    }
+
+    .additional-data {
+        flex-direction: column; /* Stack vertically */
+    }
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 480px) {
+    .dashboard-overview {
+        flex-direction: column; /* Stack cards vertically */
+        gap: 10px; /* Adjust spacing */
+    }
+
+    .overview-card {
+        flex: 1 1 100%; /* Full width for each card */
+    }
+
+    .dashboard-charts, .traffic-and-data {
+        flex-direction: column; /* Stack charts vertically */
+        gap: 10px; /* Adjust spacing */
+    }
+
+    .chart-container, .traffic-chart, .customer, .browser {
+        flex: 1 1 100%; /* Full width for each chart */
+        max-width: 100%; /* Ensure containers adapt to device width */
+    }
+
+    .additional-data {
+        flex-direction: column; /* Stack vertically */
+        gap: 10px; /* Adjust spacing */
+    }
 }

@@ -174,3 +174,50 @@ footer a:hover {
   text-decoration: underline; /* Add hover effect */
   color: #5de7ff; /* Hover effect */
 }
+
+/* Responsive styles for tablets */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Stack header elements vertically */
+        align-items: center;
+    }
+
+    nav ul {
+        flex-wrap: wrap; /* Allow navigation items to wrap */
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 5px; /* Adjust spacing */
+    }
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 480px) {
+    header {
+        flex-direction: column; /* Stack header elements vertically */
+        align-items: center;
+    }
+
+    .site-logo {
+        height: 30px; /* Reduce logo size */
+    }
+
+    .site-name {
+        font-size: 1rem; /* Adjust font size */
+    }
+
+    nav ul {
+        flex-direction: column; /* Stack navigation items vertically */
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 4px 0; /* Adjust spacing */
+    }
+
+    footer {
+        font-size: 0.8rem; /* Reduce font size */
+        padding: 5px; /* Adjust padding */
+    }
+}
