@@ -1,0 +1,176 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Header Styles */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e3245;
+  color: #ecf0f1;
+  padding: 10px 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.site-logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.site-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ecf0f1; /* Default color for "Saurabh E-Commerce" */
+}
+
+.site-name-main {
+  color: #ecf0f1; /* Default color for "Saurabh E-Commerce" */
+  font-weight: bold; /* Make "Saurabh" bold */
+}
+.site-name-sub {
+  font-weight: normal;
+  color: #0099ff; /* Different color for "Admin" */
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Ensure spacing between buttons */
+}
+
+.header-right .icon {
+  height: 20px;
+}
+
+.notifications-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  color: #ecf0f1;
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Add spacing between icon and text */
+}
+
+.login-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ecf0f1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #3498db;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.login-btn .icon {
+  height: 16px; /* Ensure consistent icon size */
+  width: 16px;
+}
+
+/* Navigation Styles */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensure it stays above other elements */
+  background-color: #3a3d63; /* Match the background color */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  padding: 10px 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: #ecf0f1;
+  font-size: 1rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+  background-color: #2c3e50;
+}
+
+/* Main Content Styles */
+main {
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 20px;
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+/* Buttons */
+button {
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Footer Styles */
+footer {
+  text-align: center;
+  padding: 2px 0; /* Reduce height */
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+footer a {
+  color: #00d9ff; /* Change color of "Saurabh" */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+footer a:hover {
+  text-decoration: underline; /* Add hover effect */
+  color: #5de7ff; /* Hover effect */
+}

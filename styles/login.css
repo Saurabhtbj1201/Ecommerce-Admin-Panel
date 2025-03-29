@@ -1,0 +1,132 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #364e65;
+    display: flex;
+    flex-direction: column; /* Ensure header, main, and footer are stacked vertically */
+    justify-content: space-between; /* Space between header, main content, and footer */
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    width: 100%;
+    background-color: #1e3245;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    position: fixed; /* Fix header at the top */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+header .header-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .site-logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+header .site-name {
+    display: flex;
+}
+
+header .site-name-main {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+header .site-name-sub {
+    font-size: 14px;
+    color: #ddd;
+    margin-left: 10px;
+    margin-top: 5px;
+    padding: 0 5px;
+}
+
+.login-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    text-align: center;
+    margin-top: 100px; /* Add margin to avoid overlap with the fixed header */
+}
+
+.login-note {
+    font-size: 17px;
+    color: #ff0000; /* Highlight the text with a distinct color */
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+input {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    width: 100%;
+    background-color: #1e3245;
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px;
+    position: fixed; /* Fix footer at the bottom */
+    bottom: 0;
+    left: 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.footer-link {
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #f1c40f;
+}

@@ -1,0 +1,135 @@
+/* Dashboard Overview Cards */
+.active {
+    font-weight: bold;
+    color: #47ff37; /* Highlight color */
+    text-decoration: underline;
+} 
+
+.dashboard-overview {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.overview-card {
+    flex: 1;
+    padding: 20px;
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.overview-card h3 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.overview-card p {
+    margin: 5px 0 0;
+    font-size: 1rem;
+}
+
+/* Dashboard Charts */
+.dashboard-charts {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.chart-container {
+    flex: 1;
+    background: #fff;
+    padding: 10px; 
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    width: auto;
+}
+
+.satisfaction-score {
+    font-size: 2rem;
+    color: #2ecc71;
+    margin: 10px 0;
+}
+
+.browser {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.browser ul {
+    list-style: none;
+    padding: 0;
+}
+
+.browser li {
+    margin: 5px 0;
+}
+
+/* Traffic Overview */
+.traffic-overview {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.traffic-chart {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.traffic-overview .chart-container {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Add gap between sections */
+}
+
+.traffic-overview .chart-container canvas {
+    margin-top: 10px; /* Add spacing between combined charts */
+}
+
+/* Traffic and Data */
+.traffic-and-data {
+    display: flex;
+    gap: 20px; /* Add spacing between sections */
+    flex-wrap: nowrap; /* Prevent wrapping to keep all items in a single row */
+    margin-bottom: 20px; /* Add spacing below the section */
+}
+
+.traffic-and-data .chart-container {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Additional Data */
+.additional-data {
+    display: flex;
+    flex-direction: column; /* Stack Customer Satisfaction and Browser Stats vertically */
+    flex: 1;
+    gap: 20px; /* Add spacing between Customer Satisfaction and Browser Stats */
+    margin-top: 20px; /* Add spacing from the previous section */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.customer, .browser {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

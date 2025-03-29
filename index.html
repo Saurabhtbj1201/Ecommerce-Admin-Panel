@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="stylesheet" href="./styles/login.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="header-left">
+        <img
+          src="./images/logo-transparent.png"
+          alt="Saurabh E-Commerce Admin Panel Logo"
+          class="site-logo"
+        />
+        <span class="site-name">
+          <span class="site-name-main">Saurabh E-Commerce</span>
+          <span class="site-name-sub">Admin</span>
+        </span>
+      </div>
+    </header>
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <h1>Login</h1>
+        <form id="loginForm">
+          <input type="text" id="name" name="name" placeholder="Your Name" required />
+          <input type="text" id="username" name="username" placeholder="Username" required />
+          <input type="password" id="password" name="password" placeholder="Password" required />
+          <button type="submit">Login</button>
+        </form>
+
+        <p class="login-note">
+            NOTE: Use <strong>admin</strong> as username and <strong>admin</strong> as password to Login to admin panel.
+          </p>
+      
+      </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        &copy; 2023
+        <a
+          href="https://www.gu-saurabh.tech/"
+          target="_blank"
+          class="footer-link"
+          >Saurabh</a
+        >. All rights reserved.
+      </p>
+    </footer>
+
+    <script>
+      document.getElementById("loginForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const name = document.getElementById("name").value.trim();
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        if (!name || username !== "admin" || password !== "admin") {
+          alert("Please fill in your name and use 'admin' as username and password.");
+        } else {
+          sessionStorage.setItem("loggedIn", true); // Set session storage on successful login
+          window.location.href = "dashboard.html";
+        }
+      });
+    </script>
+  </body>
+</html>
