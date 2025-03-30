@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="stylesheet" href="./styles/customer-management.css" />
+    <!-- Link dashboard-specific styles -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-left">
+        <img
+          src="./images/logo-transparent.png"
+          alt="Saurabh E-Commerce Admin Panel Logo"
+          class="site-logo"
+        />
+        <span class="site-name">
+          <span class="site-name-main">Saurabh E-Commerce</span>
+          <span class="site-name-sub">Admin</span>
+        </span>
+      </div>
+      <div class="header-right">
+        <button class="notifications-btn">
+          <img
+            src="./images/bell.png"
+            alt="Notification Bell Icon"
+            class="icon"
+          />
+        </button>
+        <a href="admin-profile.html" class="login-btn">
+          <img src="./images/account.png" alt="Login Icon" class="icon" />
+        </a>
+      </div>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="product-management.html">Product Management</a></li>
+        <li><a href="order-management.html">Order Management</a></li>
+        <li><a href="customer-management.html" class="active">Customer Management</a></li>
+        <li><a href="admin-profile.html">Admin Profile</a></li>
+      </ul>
+    </nav>
+    <!-- Main Dashboard Content -->
+    <main>
+      <section class="customer-list">
+        <h1>Customer Management</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="customer-table-body">
+            <tr>
+              <td data-label="ID">1</td>
+              <td data-label="Name">John Doe</td>
+              <td data-label="Email">john.doe@example.com</td>
+              <td data-label="Phone">+1234567890</td>
+              <td data-label="Actions">
+                <button class="edit-btn" onclick="editCustomer(1)">Edit</button>
+                <button class="delete-btn" onclick="deleteCustomer(1)">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="ID">2</td>
+              <td data-label="Name">Jane Smith</td>
+              <td data-label="Email">jane.smith@example.com</td>
+              <td data-label="Phone">+1234567891</td>
+              <td data-label="Actions">
+                <button class="edit-btn" onclick="editCustomer(2)">Edit</button>
+                <button class="delete-btn" onclick="deleteCustomer(2)">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="ID">3</td>
+              <td data-label="Name">Michael Brown</td>
+              <td data-label="Email">michael.brown@example.com</td>
+              <td data-label="Phone">+1234567892</td>
+              <td data-label="Actions">
+                <button class="edit-btn" onclick="editCustomer(3)">Edit</button>
+                <button class="delete-btn" onclick="deleteCustomer(3)">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="ID">4</td>
+              <td data-label="Name">Emily Davis</td>
+              <td data-label="Email">emily.davis@example.com</td>
+              <td data-label="Phone">+1234567893</td>
+              <td data-label="Actions">
+                <button class="edit-btn" onclick="editCustomer(4)">Edit</button>
+                <button class="delete-btn" onclick="deleteCustomer(4)">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="ID">5</td>
+              <td data-label="Name">Chris Wilson</td>
+              <td data-label="Email">chris.wilson@example.com</td>
+              <td data-label="Phone">+1234567894</td>
+              <td data-label="Actions">
+                <button class="edit-btn" onclick="editCustomer(5)">Edit</button>
+                <button class="delete-btn" onclick="deleteCustomer(5)">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="ID">6</td>
+              <td data-label="Name">Sarah Johnson</td>
+              <td data-label="Email">sarah.johnson@example.com</td>
+              <td data-label="Phone">+1234567895</td>
+              <td data-label="Actions">
+                <button class="edit-btn" onclick="editCustomer(6)">Edit</button>
+                <button class="delete-btn" onclick="deleteCustomer(6)">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="ID">7</td>
+              <td data-label="Name">David Lee</td>
+              <td data-label="Email">david.lee@example.com</td>
+              <td data-label="Phone">+1234567896</td>
+              <td data-label="Actions">
+                <button class="edit-btn" onclick="editCustomer(7)">Edit</button>
+                <button class="delete-btn" onclick="deleteCustomer(7)">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="ID">8</td>
+              <td data-label="Name">Laura Martinez</td>
+              <td data-label="Email">laura.martinez@example.com</td>
+              <td data-label="Phone">+1234567897</td>
+              <td data-label="Actions">
+                <button class="edit-btn" onclick="editCustomer(8)">Edit</button>
+                <button class="delete-btn" onclick="deleteCustomer(8)">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="ID">9</td>
+              <td data-label="Name">James Anderson</td>
+              <td data-label="Email">james.anderson@example.com</td>
+              <td data-label="Phone">+1234567898</td>
+              <td data-label="Actions">
+                <button class="edit-btn" onclick="editCustomer(9)">Edit</button>
+                <button class="delete-btn" onclick="deleteCustomer(9)">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="ID">10</td>
+              <td data-label="Name">Olivia Thomas</td>
+              <td data-label="Email">olivia.thomas@example.com</td>
+              <td data-label="Phone">+1234567899</td>
+              <td data-label="Actions">
+                <button class="edit-btn" onclick="editCustomer(10)">Edit</button>
+                <button class="delete-btn" onclick="deleteCustomer(10)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="add-customer">
+        <h2>Add New Customer</h2>
+        <form id="add-customer-form">
+          <label for="customer-name">Name:</label>
+          <input type="text" id="customer-name" name="name" required />
+          <label for="customer-email">Email:</label>
+          <input type="email" id="customer-email" name="email" required />
+          <label for="customer-phone">Phone:</label>
+          <input type="tel" id="customer-phone" name="phone" required />
+          <button type="submit">Add Customer</button>
+        </form>
+      </section>
+    </main>
+    <script>
+      let customerIdCounter = 10;
+
+      function editCustomer(id) {
+        const row = document.querySelector(`#customer-table-body tr:nth-child(${id})`);
+        const name = prompt("Enter new name:", row.children[1].textContent);
+        const email = prompt("Enter new email:", row.children[2].textContent);
+        const phone = prompt("Enter new phone:", row.children[3].textContent);
+
+        if (name && email && phone) {
+          row.children[1].textContent = name;
+          row.children[2].textContent = email;
+          row.children[3].textContent = phone;
+        }
+      }
+
+      function deleteCustomer(id) {
+        const row = document.querySelector(`#customer-table-body tr:nth-child(${id})`);
+        row.remove();
+      }
+
+      document.getElementById('add-customer-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name = document.getElementById('customer-name').value;
+        const email = document.getElementById('customer-email').value;
+        const phone = document.getElementById('customer-phone').value;
+
+        if (name && email && phone) {
+          customerIdCounter++;
+          const newRow = document.createElement('tr');
+          newRow.innerHTML = `
+            <td data-label="ID">${customerIdCounter}</td>
+            <td data-label="Name">${name}</td>
+            <td data-label="Email">${email}</td>
+            <td data-label="Phone">${phone}</td>
+            <td data-label="Actions">
+              <button class="edit-btn" onclick="editCustomer(${customerIdCounter})">Edit</button>
+              <button class="delete-btn" onclick="deleteCustomer(${customerIdCounter})">Delete</button>
+            </td>
+          `;
+          document.getElementById('customer-table-body').appendChild(newRow);
+          alert('Customer added successfully!');
+        }
+      });
+      
+    </script>
+  </body>
+</html>

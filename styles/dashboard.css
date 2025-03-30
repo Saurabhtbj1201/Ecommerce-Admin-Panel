@@ -143,6 +143,16 @@
 /* Responsive styles for tablets */
 @media (max-width: 768px) {
     .dashboard-overview {
+        display: grid; /* Use grid layout */
+        grid-template-columns: repeat(2, 1fr); /* Two cards per row */
+        gap: 10px; /* Adjust spacing */
+    }
+
+    .overview-card {
+        flex: unset; /* Remove flex properties for grid layout */
+    }
+
+    .dashboard-overview {
         flex-wrap: wrap; /* Allow cards to wrap */
         gap: 10px; /* Adjust spacing */
     }
@@ -168,6 +178,16 @@
 
 /* Responsive styles for mobile devices */
 @media (max-width: 480px) {
+    .dashboard-overview {
+        display: grid; /* Use grid layout */
+        grid-template-columns: repeat(2, 1fr); /* Two cards per row */
+        gap: 10px; /* Adjust spacing */
+    }
+
+    .overview-card {
+        flex: unset; /* Remove flex properties for grid layout */
+    }
+
     .dashboard-overview {
         flex-direction: column; /* Stack cards vertically */
         gap: 10px; /* Adjust spacing */

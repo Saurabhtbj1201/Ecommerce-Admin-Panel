@@ -1,0 +1,61 @@
+/* order-management.css */
+.active {
+    font-weight: bold;
+    color: #47ff37; /* Highlight color */
+    text-decoration: underline;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: white;
+}
+
+table th, table td {
+    border: 1px solid #0007d6;
+    padding: 0.8rem;
+    text-align: left;
+}
+
+table th {
+    background-color: #e0d8ff;
+}
+
+table tr:nth-child(even) {
+    background-color: #fffff0;
+}
+
+table tr:hover {
+    background-color: #ffe4e4;
+}
+
+@media (max-width: 768px) {
+    table {
+        font-size: 0.9rem;
+    }
+
+    table th, table td {
+        padding: 0.5rem;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .active {
+        font-size: 1rem;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    table th, table td {
+        padding: 0.4rem;
+    }
+}

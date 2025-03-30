@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Management</title>
+  <link rel="stylesheet" href="./styles/styles.css" />
+  <link rel="stylesheet" href="./styles/order-management.css" />
+
+</head>
+<header>
+  <div class="header-left">
+    <img src="./images/logo-transparent.png" alt="Saurabh E-Commerce Admin Panel Logo" class="site-logo">
+    <span class="site-name">
+      <span class="site-name-main">Saurabh E-Commerce</span>
+      <span class="site-name-sub">Admin</span>
+    </span>
+  </div>
+
+  <div class="header-right">
+    <button class="notifications-btn">
+      <img src="./images/bell.png" alt="Notification Bell Icon" class="icon">
+    </button>
+    <a href="admin-profile.html" class="login-btn">
+      <img src="./images/account.png" alt="Login Icon" class="icon" />
+    </a>
+  </div>
+</header>
+<nav>
+  <ul>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="product-management.html">Product Management</a></li>
+    <li><a href="order-management.html" class="active"> Order Management</a></li>
+    <li><a href="customer-management.html">Customer Management</a></li>
+    <li><a href="admin-profile.html">Admin Profile</a></li>
+  </ul>
+</nav>
+
+<body>
+  <main>
+    <h1>Order Management</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer Name</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Example row -->
+        <tr>
+          <td>001</td>
+          <td>John Doe</td>
+          <td>Smartphone</td>
+          <td>2</td>
+          <td>
+            <select>
+              <option value="Pending">Pending</option>
+              <option value="Shipped" selected>Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <!-- Random 20 orders -->
+        <tr>
+          <td>002</td>
+          <td>Jane Smith</td>
+          <td>Laptop</td>
+          <td>1</td>
+          <td>
+            <select>
+              <option value="Pending" selected>Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>003</td>
+          <td>Michael Brown</td>
+          <td>Headphones</td>
+          <td>3</td>
+          <td>
+            <select>
+              <option value="Pending">Pending</option>
+              <option value="Shipped" selected>Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>004</td>
+          <td>Sarah Johnson</td>
+          <td>Smartwatch</td>
+          <td>2</td>
+          <td>
+            <select>
+              <option value="Pending">Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered" selected>Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>005</td>
+          <td>Chris Lee</td>
+          <td>Camera</td>
+          <td>1</td>
+          <td>
+            <select>
+              <option value="Pending" selected>Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>006</td>
+          <td>Emily Davis</td>
+          <td>Tablet</td>
+          <td>1</td>
+          <td>
+            <select>
+              <option value="Pending">Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered" selected>Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>007</td>
+          <td>David Wilson</td>
+          <td>Keyboard</td>
+          <td>5</td>
+          <td>
+            <select>
+              <option value="Pending">Pending</option>
+              <option value="Shipped" selected>Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>008</td>
+          <td>Anna Taylor</td>
+          <td>Mouse</td>
+          <td>4</td>
+          <td>
+            <select>
+              <option value="Pending" selected>Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>009</td>
+          <td>James Anderson</td>
+          <td>Monitor</td>
+          <td>2</td>
+          <td>
+            <select>
+              <option value="Pending">Pending</option>
+              <option value="Shipped" selected>Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>010</td>
+          <td>Olivia Martinez</td>
+          <td>Printer</td>
+          <td>1</td>
+          <td>
+            <select>
+              <option value="Pending">Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered" selected>Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>011</td>
+          <td>Daniel Thomas</td>
+          <td>Router</td>
+          <td>3</td>
+          <td>
+            <select>
+              <option value="Pending" selected>Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>012</td>
+          <td>Emma White</td>
+          <td>Speaker</td>
+          <td>2</td>
+          <td>
+            <select>
+              <option value="Pending">Pending</option>
+              <option value="Shipped" selected>Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>013</td>
+          <td>Lucas Harris</td>
+          <td>External Hard Drive</td>
+          <td>1</td>
+          <td>
+            <select>
+              <option value="Pending">Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered" selected>Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>014</td>
+          <td>Isabella Clark</td>
+          <td>Webcam</td>
+          <td>2</td>
+          <td>
+            <select>
+              <option value="Pending" selected>Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>015</td>
+          <td>Matthew Lewis</td>
+          <td>Microphone</td>
+          <td>1</td>
+          <td>
+            <select>
+              <option value="Pending">Pending</option>
+              <option value="Shipped" selected>Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>016</td>
+          <td>Sophia Walker</td>
+          <td>Projector</td>
+          <td>1</td>
+          <td>
+            <select>
+              <option value="Pending" selected>Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>017</td>
+          <td>Andrew Hall</td>
+          <td>Gaming Console</td>
+          <td>1</td>
+          <td>
+            <select>
+              <option value="Pending">Pending</option>
+              <option value="Shipped" selected>Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>018</td>
+          <td>Charlotte Allen</td>
+          <td>VR Headset</td>
+          <td>1</td>
+          <td>
+            <select>
+              <option value="Pending">Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered" selected>Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>019</td>
+          <td>Benjamin Young</td>
+          <td>Drone</td>
+          <td>1</td>
+          <td>
+            <select>
+              <option value="Pending" selected>Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>020</td>
+          <td>Amelia King</td>
+          <td>Smart Light</td>
+          <td>4</td>
+          <td>
+            <select>
+              <option value="Pending">Pending</option>
+              <option value="Shipped" selected>Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const statusDropdowns = document.querySelectorAll("tbody select");
+
+      statusDropdowns.forEach((dropdown) => {
+        const statusCell = dropdown.closest("td"); // Get the parent cell
+        const selectedStatus = dropdown.value;
+
+        // Set initial background color based on status
+        switch (selectedStatus) {
+          case "Pending":
+            statusCell.style.backgroundColor = "#ffcccb"; // Light red
+            break;
+          case "Shipped":
+            statusCell.style.backgroundColor = "#add8e6"; // Light blue
+            break;
+          case "Delivered":
+            statusCell.style.backgroundColor = "#90ee90"; // Light green
+            break;
+          case "Cancelled":
+            statusCell.style.backgroundColor = "#d3d3d3"; // Light gray
+            break;
+        }
+
+        // Add event listener for status change
+        dropdown.addEventListener("change", (event) => {
+          const newStatus = event.target.value;
+
+          // Reset background color
+          statusCell.style.backgroundColor = "";
+
+          // Set background color based on new status
+          switch (newStatus) {
+            case "Pending":
+              statusCell.style.backgroundColor = "#ffcccb"; // Light red
+              break;
+            case "Shipped":
+              statusCell.style.backgroundColor = "#add8e6"; // Light blue
+              break;
+            case "Delivered":
+              statusCell.style.backgroundColor = "#90ee90"; // Light green
+              break;
+            case "Cancelled":
+              statusCell.style.backgroundColor = "#d3d3d3"; // Light gray
+              break;
+          }
+        });
+      });
+    });
+   
+  </script>
+</html>
