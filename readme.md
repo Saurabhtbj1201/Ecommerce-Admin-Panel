@@ -66,3 +66,5 @@ Developed by [Saurabh](https://www.gu-saurabh.tech/).
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+---
