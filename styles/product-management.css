@@ -67,7 +67,7 @@ table th, table td {
 
 table th {
     background-color: #007bff;
-    color: white;
+    color: white; 
 }
 
 table tbody tr:nth-child(even) {

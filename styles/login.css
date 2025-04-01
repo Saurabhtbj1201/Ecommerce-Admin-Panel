@@ -1,181 +1,77 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #364e65;
-    display: flex;
-    flex-direction: column; /* Ensure header, main, and footer are stacked vertically */
-    justify-content: space-between; /* Space between header, main content, and footer */
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-header {
-    width: 100%;
-    background-color: #1e3245;
-    color: #fff;
-    padding: 10px 20px;
-    text-align: center;
-    position: fixed; /* Fix header at the top */
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-header .header-left {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-header .site-logo {
-    height: 40px;
-    margin-right: 10px;
-}
-
-header .site-name {
-    display: flex;
-}
-
-header .site-name-main {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-header .site-name-sub {
-    font-size: 14px;
-    color: #ddd;
-    margin-left: 10px;
-    margin-top: 5px;
-    padding: 0 5px;
-}
-
 .login-container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 500px;
-    text-align: center;
-    margin-top: 100px; /* Add margin to avoid overlap with the fixed header */
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.login-note {
-    font-size: 17px;
-    color: #ff0000; /* Highlight the text with a distinct color */
-    text-align: center;
+.login-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
 }
 
-h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
+.login-container label {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
+.login-container input {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
-label {
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #555;
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-input {
-    margin-bottom: 15px;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.login-container button:hover {
+  background-color: #0056b3;
 }
 
-button {
-    padding: 10px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #007BFF;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+.login-message {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
 }
 
-button:hover {
-    background-color: #0056b3;
+.signup-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+.signup-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
 }
 
 footer {
-    width: 100%;
-    background-color: #1e3245;
-    color: #fff;
-    text-align: center;
-    padding: 10px 20px;
-    position: fixed; /* Fix footer at the bottom */
-    bottom: 0;
-    left: 0;
-}
-
-footer p {
-    margin: 0;
-    font-size: 14px;
-}
-
-.footer-link {
-    font-weight: bold;
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-link:hover {
-    color: #f1c40f;
-}
-
-/* Responsive styles for tablets */
-@media (max-width: 768px) {
-    .login-container {
-        width: 80%; /* Adjust width for smaller screens */
-        margin-top: 120px; /* Adjust margin for better spacing */
-    }
-
-    header .site-name-main {
-        font-size: 16px; /* Reduce font size */
-    }
-
-    header .site-name-sub {
-        font-size: 12px; /* Reduce font size */
-    }
-
-    input, button {
-        font-size: 14px; /* Adjust font size for inputs and buttons */
-    }
-}
-
-/* Responsive styles for mobile devices */
-@media (max-width: 480px) {
-    .login-container {
-        width: 80%; /* Further reduce width for mobile */
-        padding: 15px; /* Adjust padding */
-    }
-
-    header .site-logo {
-        height: 30px; /* Reduce logo size */
-    }
-
-    header .site-name-main {
-        font-size: 14px; /* Further reduce font size */
-    }
-
-    header .site-name-sub {
-        font-size: 10px; /* Further reduce font size */
-    }
-
-    input, button {
-        font-size: 12px; /* Further adjust font size */
-        padding: 8px; /* Adjust padding */
-    }
-
-    .login-note {
-        font-size: 14px; /* Adjust note font size */
-    }
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
 }

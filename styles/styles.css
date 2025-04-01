@@ -201,10 +201,7 @@ footer a:hover {
         gap: 10px; /* Maintain spacing between buttons */
     }
 
-    .login-btn {
-        padding: 5px 10px; /* Adjust padding */
-        font-size: 0.9rem; /* Adjust font size */
-    }
+    
 }
 
 /* Responsive styles for mobile devices */
@@ -255,10 +252,5 @@ footer a:hover {
     .header-right {
         flex-direction: row; /* Ensure buttons are in a single row */
         gap: 5px; /* Reduce spacing between buttons */
-    }
-
-    .login-btn {
-        padding: 5px 8px; /* Adjust padding */
-        font-size: 0.8rem; /* Further adjust font size */
     }
 }

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./styles/styles.css" />
     <link rel="stylesheet" href="./styles/login.css" />
   </head>
+
   <body>
     <!-- Header -->
     <header>
@@ -23,49 +24,86 @@
       </div>
     </header>
 
-    <!-- Login Container -->
-    <div class="login-container">
+    <!-- Login Form -->
+    <main>
+      <section class="login-container">
         <h1>Login</h1>
-        <form id="loginForm">
-          <input type="text" id="name" name="name" placeholder="Your Name" required />
-          <input type="text" id="username" name="username" placeholder="Username" required />
-          <input type="password" id="password" name="password" placeholder="Password" required />
-          <button type="submit">Login</button>
+        <form id="login-form">
+          <label for="username">Username/Email/Mobile No:</label>
+          <input type="text" id="username" name="username" required />
+
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+
+          <button type="submit" id="login-button">Login</button>
+          <p id="loading-message" style="display: none; color: blue">
+            Logging in...
+          </p>
         </form>
 
-        <p class="login-note">
-            NOTE: Use <strong>admin</strong> as username and <strong>admin</strong> as password to Login to admin panel.
-          </p>
-      
-      </div>
+        <p id="login-message" class="login-message"></p>
+        <p class="signup-link">
+          Don't have an account? <a href="signup.html">Sign up</a>
+        </p>
+      </section>
+    </main>
 
     <!-- Footer -->
     <footer>
       <p>
-        &copy; 2023
-        <a
+        Designed & managed by:<a
           href="https://www.gu-saurabh.tech/"
           target="_blank"
           class="footer-link"
-          >Saurabh</a
-        >. All rights reserved.
+        >
+          Saurabh Kumar</a
+        >. &copy; 2025 - All rights reserved.
       </p>
     </footer>
 
     <script>
-      document.getElementById("loginForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        const name = document.getElementById("name").value.trim();
-        const username = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
 
-        if (!name || username !== "admin" || password !== "admin") {
-          alert("Please fill in your name and use 'admin' as username and password.");
-        } else {
-          sessionStorage.setItem("loggedIn", true); // Set session storage on successful login
-          window.location.href = "dashboard.html";
-        }
-      });
+          const input = document.getElementById("username").value.trim();
+          const password = document.getElementById("password").value;
+          const scriptURL =
+            "https://script.google.com/macros/s/AKfycbymrFvsxipkhi98x_Y0dIYpE5Tr4-XU90vEEMvOOlM9u531TrKeepqmOj9YIIIq21cC/exec";
+
+          try {
+            const response = await fetch(scriptURL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ input, password }),
+            });
+
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            console.log("API Response:", result); // Debugging log
+
+            const messageElement = document.getElementById("login-message");
+
+            if (result.success) {
+              messageElement.textContent = "Login successful!";
+              messageElement.style.color = "green";
+              setTimeout(() => (window.location.href = "dashboard.html"), 1000);
+            } else {
+              messageElement.textContent =
+                "Invalid credentials. Please try again.";
+              messageElement.style.color = "red";
+            }
+          } catch (error) {
+            console.error("Fetch Error:", error); // Log error for debugging
+            document.getElementById("login-message").textContent =
+              "An error occurred. Please try again later.";
+            document.getElementById("login-message").style.color = "red";
+          }
+        });
     </script>
   </body>
 </html>
