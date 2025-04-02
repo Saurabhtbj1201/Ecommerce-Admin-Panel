@@ -36,26 +36,37 @@ The **Admin Panel** is a web-based application designed to manage various aspect
 ```
 Admin Panel/
 ├── Backend/
+│   ├── .env                     # Environment variables
 │   ├── server.js                # Backend server for APIs
 ├── Frontend/
+│   ├── admin-profile.html       # Admin profile page
+│   ├── customer-management.html # Customer management page
 │   ├── dashboard.html           # Dashboard page
-│   ├── product-management.html  # Product management page
+│   ├── index.html               # Login page
 │   ├── order-management.html    # Order management page
 │   ├── order-management-all.html # All orders page
-│   ├── customer-management.html # Customer management page
-│   ├── admin-profile.html       # Admin profile page
-│   ├── index.html               # Login page
+│   ├── pass-matched.html        # Password reset confirmation page
+│   ├── product-management.html  # Product management page
 │   ├── styles/
-│   │   ├── styles.css           # Global styles
-│   │   ├── dashboard.css        # Dashboard-specific styles
-│   │   ├── product-management.css # Product management-specific styles
-│   │   ├── order-management.css # Order management-specific styles
-│   │   ├── customer-management.css # Customer management-specific styles
 │   │   ├── admin-profile.css    # Admin profile-specific styles
+│   │   ├── customer-management.css # Customer management-specific styles
+│   │   ├── dashboard.css        # Dashboard-specific styles
 │   │   ├── login.css            # Login page-specific styles
+│   │   ├── order-management-all.css # All orders-specific styles
+│   │   ├── order-management.css # Order management-specific styles
+│   │   ├── pass-matched.css     # Password reset confirmation-specific styles
+│   │   ├── product-management.css # Product management-specific styles
+│   │   ├── styles.css           # Global styles
 │   ├── scripts/
+│   │   ├── auth.js              # Authentication-related JavaScript
 │   │   ├── dashboard.js         # Dashboard-specific JavaScript
 │   ├── images/                  # Image assets (e.g., logo, icons)
+│   │   ├── logo-transparent.png # Transparent logo
+│   │   ├── bell.png             # Notification bell icon
+│   │   ├── account.png          # Account icon
+│   │   ├── bg.jpg               # Background image for login
+│   │   ├── bg1.jpg              # Background image for password reset
+│   │   ├── Reports Admin.pdf    # Admin reports PDF
 ├── README.md                    # Project documentation
 ```
 
