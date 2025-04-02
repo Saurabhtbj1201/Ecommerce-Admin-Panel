@@ -1,0 +1,144 @@
+body {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  margin: 0;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.login-container h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 24px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background-color: #0056b3;
+}
+
+.login-message {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+.signup-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.login-container .form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.login-container .form-group input {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.login-container .form-group label {
+  color: #434343;
+  position: absolute;
+  top: 40%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 15px; /* Increased font size */
+  padding: 0 5px; 
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.login-container .form-group input:focus + label {
+  top: -10px;
+  font-size: 14px; /* Adjusted font size */
+  color: #0084c2;
+  background-color: #f9f9f9;
+  padding: 0 3px; /* Adjusted padding */
+}
+
+.login-container .form-group input:not(:placeholder-shown) + label {
+  top: -10px;
+  font-size: 14px; /* Adjusted font size */
+  color: #0084c2;
+  background-color: #f9f9f9;
+  padding: 0 3px; /* Adjusted padding */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .login-container {
+    max-width: 75%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+  }
+  /* Adjust heading font size for smaller screens */
+  .login-container h1 {
+    font-size: 20px; /* Reduced font size */
+  }
+
+  /* Adjust label font size and padding for smaller screens */
+  .login-container .form-group label {
+    font-size: 14px; /* Reduced font size */
+    padding: 0 3px; /* Adjusted padding */
+  }
+
+  /* Adjust label font size and padding when input is focused */
+  .login-container .form-group input:focus + label {
+    font-size: 13px; /* Reduced font size */
+    padding: 0 2px; /* Adjusted padding */
+  }
+
+  body {
+    background-size: cover;
+  }
+}
+

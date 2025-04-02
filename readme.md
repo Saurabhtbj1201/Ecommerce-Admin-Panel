@@ -14,41 +14,66 @@ The **Admin Panel** is a web-based application designed to manage various aspect
 - Fields include product name, brand, price, discount price, shipping charges, specifications, return policy, and product image.
 - Dynamically updates the product list table.
 
-### Navigation
-- Links to different sections: Dashboard, Product Management, Order Management, Customer Management, and Admin Profile.
+### Order Management
+- View, update, and track orders.
+- Categorized views for running, delivered, and cancelled orders.
+- Export order data to CSV.
+
+### Customer Management
+- View and manage customer details.
+- Export customer data to CSV.
+
+### Admin Profile
+- View and edit admin profile details.
+- Change profile photo and update contact information.
 
 ### Authentication
-- Includes a logout feature that clears session storage and prevents navigation back to the dashboard after logout.
+- Includes a login feature with username/email and password.
+- Logout functionality clears session storage and prevents navigation back to the dashboard after logout.
 
 ## File Structure
 
 ```
 Admin Panel/
-├── dashboard.html               # Dashboard page
-├── product-management.html       # Product management page
-├── styles/
-│   ├── styles.css               # Global styles
-│   ├── dashboard.css            # Dashboard-specific styles
-│   ├── product-management.css   # Product management-specific styles
-├── scripts/
-│   ├── dashboard.js             # Dashboard-specific JavaScript
-├── images/                      # Image assets (e.g., logo, icons)
-└── README.md                    # Project documentation
+├── Backend/
+│   ├── server.js                # Backend server for APIs
+├── Frontend/
+│   ├── dashboard.html           # Dashboard page
+│   ├── product-management.html  # Product management page
+│   ├── order-management.html    # Order management page
+│   ├── order-management-all.html # All orders page
+│   ├── customer-management.html # Customer management page
+│   ├── admin-profile.html       # Admin profile page
+│   ├── index.html               # Login page
+│   ├── styles/
+│   │   ├── styles.css           # Global styles
+│   │   ├── dashboard.css        # Dashboard-specific styles
+│   │   ├── product-management.css # Product management-specific styles
+│   │   ├── order-management.css # Order management-specific styles
+│   │   ├── customer-management.css # Customer management-specific styles
+│   │   ├── admin-profile.css    # Admin profile-specific styles
+│   │   ├── login.css            # Login page-specific styles
+│   ├── scripts/
+│   │   ├── dashboard.js         # Dashboard-specific JavaScript
+│   ├── images/                  # Image assets (e.g., logo, icons)
+├── README.md                    # Project documentation
 ```
 
 ## How to Use
 
 1. Clone the repository or download the project files.
-2. Open `dashboard.html` or `product-management.html` in a browser to view the application.
-3. Use the navigation bar to switch between sections.
-4. Add, update, or delete products in the Product Management section.
-5. View analytics and metrics on the Dashboard.
+2. Start the backend server by running `node server.js` in the `Backend` directory.
+3. Open `index.html` in a browser to access the login page.
+4. Use the navigation bar to switch between sections after logging in.
+5. Manage products, orders, customers, and admin profile using the respective sections.
 
 ## Technologies Used
 
 - **HTML5**: Structure of the application.
 - **CSS3**: Styling and layout.
 - **JavaScript**: Dynamic functionality and interactivity.
+- **Node.js**: Backend server.
+- **MySQL**: Database for storing admin panel data.
 - **Chart.js**: For rendering charts on the dashboard.
 - **Leaflet.js**: For location-based visualizations.
 

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel Login</title>
+  <link rel="stylesheet" href="./styles/styles.css" />
+  <link rel="stylesheet" href="./styles/login.css" />
+  <script>
+    // Prevent logged-in users from accessing the login page
+    document.addEventListener("DOMContentLoaded", function () {
+      if (localStorage.getItem("isLoggedIn") && window.location.pathname.endsWith("index.html")) {
+        window.location.href = "dashboard.html";
+      }
+    });
+  </script>
+</head>
+
+<body style="background-image: url('./images/bg.jpg');">
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <img src="./images/logo-transparent.png" alt="Saurabh E-Commerce Admin Panel Logo" class="site-logo" />
+      <span class="site-name">
+        <span class="site-name-main">Saurabh E-Commerce</span>
+        <span class="site-name-sub">Admin</span>
+      </span>
+    </div>
+  </header>
+
+  <!-- Login Form -->
+  <section class="login-container">
+    <h1>Admin Panel Login</h1>
+    <form id="login-form">
+      <div class="form-group">
+        <input type="text" id="username" name="username" placeholder=" " required />
+        <label for="username">Username/Email</label>
+      </div>
+
+      <div class="form-group">
+        <input type="password" id="password" name="password" placeholder=" " required />
+        <label for="password">Password:</label>
+      </div>
+
+      <button type="submit" id="login-button">Login</button>
+      <p id="loading-message" style="display: none; color: blue">Logging in...</p>
+    </form>
+
+    <p id="login-message" class="login-message"></p>
+    <p class="signup-link">
+      Trouble logging in? <a href="./forgetpass.html">Reset your password</a>
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Designed & managed by: 
+      <a href="https://www.gu-saurabh.tech/" target="_blank" class="footer-link">
+        Saurabh Kumar
+      </a>. &copy; 2025 - All rights reserved.
+    </p>
+  </footer>
+
+ <script>
+    document.getElementById("login-form").addEventListener("submit", async function (event) {
+      event.preventDefault();
+      document.getElementById("loading-message").style.display = "block";
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const response = await fetch("http://localhost:3000/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password })
+        });
+
+        const result = await response.json();
+        document.getElementById("loading-message").style.display = "none";
+        document.getElementById("login-message").textContent = result.message;
+
+        if (result.success) {
+          localStorage.setItem("isLoggedIn", "true"); // Store login status
+          setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 1000);
+        } else {
+          document.getElementById("login-message").style.color = "red";
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        document.getElementById("loading-message").style.display = "none";
+        document.getElementById("login-message").textContent = "Login failed. Please try again.";
+        document.getElementById("login-message").style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>

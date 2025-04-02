@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="stylesheet" href="./styles/customer-management.css" />
+    <!-- Link dashboard-specific styles -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="scripts/auth.js"></script>
+
+  </head>
+  <body>
+    <header>
+      <div class="header-left">
+        <img
+          src="./images/logo-transparent.png"
+          alt="Saurabh E-Commerce Admin Panel Logo"
+          class="site-logo"
+        />
+        <span class="site-name">
+          <span class="site-name-main">Saurabh E-Commerce</span>
+          <span class="site-name-sub">Admin</span>
+        </span>
+      </div>
+      <div class="header-right">
+        <a href="admin-profile.html" class="login-btn">
+          <img src="./images/account.png" alt="Login Icon" class="icon" />
+        </a>
+      </div>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="product-management.html">Product Management</a></li>
+        <li><a href="order-management.html">Order Management</a></li>
+        <li><a href="customer-management.html" class="active">Customer Management</a></li>
+        <li><a href="admin-profile.html">Admin Profile</a></li>
+      </ul>
+    </nav>
+    <!-- Main Dashboard Content -->
+    <main>
+      <div class="button-container">
+        <button id="addCustomerButton">Add Customer</button>
+        <button id="exportButton">Download Customers Data</button>
+      </div>
+      <h1>Customer Management</h1>
+
+      <!-- Active Customers Section -->
+      <div id="activeCustomers" class="category-container">
+        <div class="grid-container"></div>
+      </div>
+
+      <script>
+        const SHEET_ID = "1YpIkY-H89itSSItBzuR0CthPhExj73tJcnfUW5znoRE";
+        const API_KEY = "AIzaSyBkvAy1Cg042gE7XtUaB5R4NienKvd7nE8";
+        const SHEET_RANGE = "Sheet1!A:Z";
+
+        async function fetchCustomerData() {
+          const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_RANGE}?key=${API_KEY}`;
+          try {
+            const response = await fetch(url);
+            const data = await response.json();
+            const rows = data.values;
+
+            if (rows && rows.length > 1) {
+              populateCustomerContainer(rows.slice(1)); // Skip header row
+            }
+          } catch (error) {
+            console.error("Error fetching customer data:", error);
+          }
+        }
+
+        function populateCustomerContainer(rows) {
+          const container = document.querySelector("#activeCustomers .grid-container");
+          container.innerHTML = ""; // Clear existing content
+
+          rows.forEach(row => {
+            const customerDiv = document.createElement("div");
+            customerDiv.className = "customer-container";
+
+            customerDiv.innerHTML = `
+              <p><strong>ID:</strong> ${row[0] || ""}</p>
+              <p><strong>Name:</strong> ${row[1] || ""}</p>
+              <p><strong>Email:</strong> ${row[2] || ""}</p>
+              <p><strong>Phone:</strong> ${row[3] || ""}</p>
+              <div class="button-container">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </div>
+            `;
+
+            container.appendChild(customerDiv);
+          });
+        }
+
+        async function exportCustomerData() {
+          try {
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_RANGE}?key=${API_KEY}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            const rows = data.values;
+
+            if (!rows || rows.length === 0) {
+              alert("No data available to export.");
+              return;
+            }
+
+            // Create a CSV string from rows
+            const csvContent = rows.map(row => row.map(cell => `"${cell || ""}"`).join(",")).join("\n");
+
+            // Convert CSV to a Blob and create a downloadable link
+            const blob = new Blob([csvContent], { type: "text/csv" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "customers.csv";
+            link.click();
+          } catch (error) {
+            console.error("Error exporting customer data:", error);
+            alert("Failed to export customer data.");
+          }
+        }
+
+        // Add event listener to export button
+        document.getElementById("exportButton").addEventListener("click", exportCustomerData);
+
+        // Fetch data when the page loads
+        document.addEventListener("DOMContentLoaded", fetchCustomerData);
+      </script>
+
+    </main>
+  </body>
+</html>

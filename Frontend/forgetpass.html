@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forget Password</title>
+  <link rel="stylesheet" href="./styles/styles.css" />
+  <link rel="stylesheet" href="./styles/forgetpass.css" />
+</head>
+
+<body style="background-image: url('./images/bg1.jpg')">
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <img src="./images/logo-transparent.png" alt="Saurabh E-Commerce Admin Panel Logo" class="site-logo" />
+      <span class="site-name">
+        <span class="site-name-main">Saurabh E-Commerce</span>
+        <span class="site-name-sub">Admin</span>
+      </span>
+    </div>
+    <a href="index.html" class="login-btn">Log in</a>
+  </header>
+
+  <!-- Reset Password Form -->
+  <section class="reset-password-container">
+    <h1>Reset Password</h1>
+    <form id="reset-password-form">
+      <div class="form-group">
+        <input type="text" id="first-name" name="first-name" placeholder=" " required />
+        <label for="first-name">First Name</label>
+      </div>
+
+      <div class="form-group">
+        <input type="text" id="last-name" name="last-name" placeholder=" " />
+        <label for="last-name">Last Name</label>
+      </div>
+
+      <div class="form-group">
+        <input type="email" id="email" name="email" placeholder=" " required />
+        <label for="email">Email</label>
+      </div>
+
+      <button type="submit" id="reset-password-button">Reset Password</button>
+      <p id="loading-message" style="display: none; color: rgb(42, 210, 0)">
+        Processing your request...
+      </p>
+    </form>
+    <p id="response-message"></p>
+    <p class="login-link">
+      Back to -  <a href="./index.html">Login</a>
+    </p>
+  </section>
+  <!-- Footer -->
+  <footer>
+    <p>
+      Designed & managed by:<a href="https://www.gu-saurabh.tech/" target="_blank" class="footer-link">
+        Saurabh Kumar</a>. &copy; 2025 - All rights reserved.
+    </p>
+  </footer>
+
+  <script>
+    document
+      .getElementById("reset-password-form")
+      .addEventListener("submit", async function (event) {
+        event.preventDefault();
+        document.getElementById("loading-message").style.display = "block";
+  
+        // Get input values
+        const firstName = document.getElementById("first-name").value;
+        const lastName = document.getElementById("last-name").value;
+        const email = document.getElementById("email").value;
+  
+        try {
+          // Send the data to the backend
+          const response = await fetch("http://localhost:3000/verify-user", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ firstName, lastName, email }),
+          });
+  
+          // Check if the response is successful
+          if (!response.ok) {
+            const errorText = await response.text(); // Get error text from the server
+            console.error("Server Error:", errorText);
+            throw new Error(errorText);
+          }
+  
+          const result = await response.json(); // Expecting JSON
+          console.log(result); // Log the result to check if everything is okay
+  
+          // Hide loading message
+          document.getElementById("loading-message").style.display = "none";
+  
+          // Display response message
+          document.getElementById("response-message").textContent = result.message;
+          document.getElementById("response-message").style.color = result.success ? "green" : "red";
+  
+          // If verification is successful, redirect with email & name in the URL
+          if (result.success) {
+            const userName = `${firstName} ${lastName}`.trim();
+            setTimeout(() => {
+              window.location.href = `pass-matched.html?name=${encodeURIComponent(userName)}&email=${encodeURIComponent(email)}`;
+            }, 1000);
+          }
+        } catch (error) {
+          document.getElementById("loading-message").style.display = "none";
+          console.error("Error:", error);
+          const responseMessageElement = document.getElementById("response-message");
+          responseMessageElement.textContent = "Failed fetching details. Please check details and try again.";
+          responseMessageElement.style.color = "rgb(215, 0, 0)";
+        }
+      });
+  </script>
+  
+</body>
+
+</html>
