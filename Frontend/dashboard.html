@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="./styles/styles.css" />
+  <link rel="stylesheet" href="./styles/dashboard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Link dashboard-specific styles -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="scripts/auth.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="header-left">
+      <img src="./images/logo-transparent.png" alt="Emmanuel Admin Panel Logo" class="site-logo" />
+      <span class="site-name">
+        <span class="site-name-main">Emmanuel</span>
+        <span class="site-name-sub">Admin</span>
+      </span>
+    </div>
+    <div class="header-center">
+      <div class="search-container">
+        <span class="search-icon"><i class="fas fa-search"></i></span>
+        <input type="text" placeholder="Search" class="search-bar">
+      </div>
+    </div>
+    <div class="header-right">
+      <a href="javascript:void(0)" class="notification-btn"><i class="fa-solid fa-bell"></i><span
+          class="notification-count"> 3</span>
+        <a href="admin-profile.html" class="profile-btn"><i class="fa-regular fa-user fa-flip"></i></a>
+        <a href="javascript:void(0)" class="logout-btn" onclick="logout()"><i
+            class="fa-solid fa-right-from-bracket"></i>
+    </div>
+  </header>
+  <nav>
+    <ul>
+      <li><i class="fas fa-tachometer-alt"></i><a href="dashboard.html" class="active">Dashboard</a></li>
+      <li><i class="fas fa-box-open"></i><a href="product-management.html">Products</a></li>
+      <li><i class="fas fa-shopping-cart"></i><a href="order-management.html">Orders</a></li>
+      <li><i class="fas fa-users"></i><a href="customer-management.html">Customers</a></li>
+      <li><i class="fas fa-user-shield"></i><a href="admin-profile.html">Admin Profile</a></li>
+    </ul>
+  </nav>
+  <!-- Main Dashboard Content -->
+  <main>
+    <section class="dashboard-overview">
+      <div class="overview-card" style="background-color: #e74c3c">
+        <h3>12,141</h3>
+        <p>Visits</p>
+      </div>
+      <div class="overview-card" style="background-color: #2ecc71">
+        <h3>1,234</h3>
+        <p>Orders</p>
+      </div>
+      <div class="overview-card" style="background-color: #f1c40f">
+        <h3>$2,74,876</h3>
+        <p>Revenue</p>
+      </div>
+      <div class="overview-card" style="background-color: #a5006b">
+        <h3>96.41%</h3>
+        <p>Bounce Rate</p>
+      </div>
+      <div class="overview-card" style="background-color: #3498db">
+        <h3>76.43%</h3>
+        <p>Growth Rate</p>
+      </div>
+    </section>
+
+    <!-- Dashboard Charts Section -->
+    <section class="dashboard-charts">
+      <div class="chart-container">
+        <h3>User Statistics</h3>
+        <canvas id="userStatisticsChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>Sales Overview</h3>
+        <canvas id="salesOverviewChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>Sales Reports Charts</h3>
+        <canvas id="salesReportsChart"></canvas>
+      </div>
+    </section>
+
+    <!-- Traffic and Additional Data Section -->
+    <section class="traffic-and-data">
+      <div class="chart-container">
+        <h3>System Preference</h3>
+        <canvas id="trafficChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>Traffic & Analytics</h3>
+        <canvas id="analyticsChart"></canvas>
+      </div>
+      <div class="additional-data">
+        <div class="customer">
+          <h3>Customer Satisfaction</h3>
+          <p class="satisfaction-score">93.13%</p>
+          <p>Previous: 79.82 | % Change: +14.29</p>
+        </div>
+        <div class="browser">
+          <h3>Browser Stats</h3>
+          <ul>
+            <li style="color: red">Google Chrome: 65%</li>
+            <li style="color: blue">Internet Explorer: 10%</li>
+            <li style="color: orange">Mozilla Firefox: 15%</li>
+            <li style="color: green">Safari: 10%</li>
+            <li style="color: purple">Opera Browser: 5%</li>
+          </ul>
+        </div>
+      </div>
+      <div class="chart-container">
+        <h3>Most Users by Location</h3>
+        <div id="locationChart" style="height: 400px"></div>
+      </div>
+    </section>
+    <button id="downloadAllReports"
+      style="margin: 20px; padding: 10px 20px; background-color: #a5006b; color: white; border: none; border-radius: 5px; cursor: pointer;"
+      onclick="downloadPDF();">
+      Download All Reports
+    </button>
+    <script>
+      function downloadPDF() {
+        const link = document.createElement('a');
+        link.href = './images/Reports Admin.pdf';
+        link.download = 'Reports Admin.pdf';
+        link.click();
+      }
+    </script>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      &copy Copyright under Emmanuel 2025. All rights reserved
+      <a href="https://www.gu-saurabh.tech/" target="_blank" class="footer-link">Saurabh Kumar</a>
+    </p>
+  </footer>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="./scripts/dashboard.js" defer></script>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+</body>
+
+</html>

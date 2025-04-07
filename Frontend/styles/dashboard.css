@@ -1,0 +1,208 @@
+/* Dashboard Overview Cards */
+.dashboard-overview {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.overview-card {
+    flex: 1;
+    padding: 20px;
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.overview-card h3 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.overview-card p {
+    margin: 5px 0 0;
+    font-size: 1rem;
+}
+
+/* Dashboard Charts */
+.dashboard-charts {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.chart-container {
+    flex: 1;
+    background: #fff;
+    padding: 10px; 
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    width: auto;
+    max-width: 100%; /* Ensure containers adapt to device width */
+}
+
+.satisfaction-score {
+    font-size: 2rem;
+    color: #2ecc71;
+    margin: 10px 0;
+}
+
+.browser {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Ensure containers adapt to device width */
+}
+
+.browser ul {
+    list-style: none;
+    padding: 0;
+}
+
+.browser li {
+    margin: 5px 0;
+}
+
+/* Traffic Overview */
+.traffic-overview {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.traffic-chart {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Ensure containers adapt to device width */
+}
+
+.traffic-overview .chart-container {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Add gap between sections */
+    max-width: 100%; /* Ensure containers adapt to device width */
+}
+
+.traffic-overview .chart-container canvas {
+    margin-top: 10px; /* Add spacing between combined charts */
+}
+
+/* Traffic and Data */
+.traffic-and-data {
+    display: flex;
+    gap: 20px; /* Add spacing between sections */
+    flex-wrap: nowrap; /* Prevent wrapping to keep all items in a single row */
+    margin-bottom: 20px; /* Add spacing below the section */
+}
+
+.traffic-and-data .chart-container {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Ensure containers adapt to device width */
+}
+
+/* Additional Data */
+.additional-data {
+    display: flex;
+    flex-direction: column; /* Stack Customer Satisfaction and Browser Stats vertically */
+    flex: 1;
+    gap: 20px; /* Add spacing between Customer Satisfaction and Browser Stats */
+    margin-top: 20px; /* Add spacing from the previous section */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.customer, .browser {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Ensure containers adapt to device width */
+}
+
+/* Responsive styles for tablets */
+@media (max-width: 768px) {
+    .dashboard-overview {
+        display: grid; /* Use grid layout */
+        grid-template-columns: repeat(2, 1fr); /* Two cards per row */
+        gap: 10px; /* Adjust spacing */
+    }
+
+    .overview-card {
+        flex: unset; /* Remove flex properties for grid layout */
+    }
+
+    .dashboard-overview {
+        flex-wrap: wrap; /* Allow cards to wrap */
+        gap: 10px; /* Adjust spacing */
+    }
+
+    .overview-card {
+        flex: 1 1 calc(50% - 10px); /* Two cards per row */
+    }
+
+    .dashboard-charts, .traffic-and-data {
+        flex-wrap: wrap; /* Allow charts to wrap */
+        gap: 10px; /* Adjust spacing */
+    }
+
+    .chart-container, .traffic-chart, .customer, .browser {
+        flex: 1 1 calc(50% - 10px); /* Two charts per row */
+        max-width: 100%; /* Ensure containers adapt to device width */
+    }
+
+    .additional-data {
+        flex-direction: column; /* Stack vertically */
+    }
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 480px) {
+    .dashboard-overview {
+        display: grid; /* Use grid layout */
+        grid-template-columns: repeat(2, 1fr); /* Two cards per row */
+        gap: 10px; /* Adjust spacing */
+    }
+
+    .overview-card {
+        flex: unset; /* Remove flex properties for grid layout */
+    }
+
+    .dashboard-overview {
+        flex-direction: column; /* Stack cards vertically */
+        gap: 10px; /* Adjust spacing */
+    }
+
+    .overview-card {
+        flex: 1 1 100%; /* Full width for each card */
+    }
+
+    .dashboard-charts, .traffic-and-data {
+        flex-direction: column; /* Stack charts vertically */
+        gap: 10px; /* Adjust spacing */
+    }
+
+    .chart-container, .traffic-chart, .customer, .browser {
+        flex: 1 1 100%; /* Full width for each chart */
+        max-width: 100%; /* Ensure containers adapt to device width */
+    }
+
+    .additional-data {
+        flex-direction: column; /* Stack vertically */
+        gap: 10px; /* Adjust spacing */
+    }
+}

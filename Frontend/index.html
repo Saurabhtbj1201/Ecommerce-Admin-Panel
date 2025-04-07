@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="./styles/login.css" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+</head>
+
+<body style="background-image: url('./images/bg.jpg')">
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <img src="./images/logo-transparent.png" alt="Emmanuel Admin Panel Logo" class="site-logo" />
+      <span class="site-name">
+        <span class="site-name-main">Emmanuel</span>
+        <span class="site-name-sub">Admin</span>
+      </span>
+    </div>
+  </header>
+
+  <!-- Login and Reset Password Forms -->
+  <section class="form-container">
+    <!-- Login Form -->
+    <div id="login-form-container">
+      <h1>Admin Panel Login</h1>
+      <form id="login-form">
+        <div class="form-group">
+          <input type="text" id="username" name="username" placeholder=" " required />
+          <label for="username">Username / Email / Mobile no</label>
+        </div>
+
+        <div class="form-group">
+          <input type="password" id="password" name="password" placeholder=" " required />
+          <label for="password">Password</label>
+        </div>
+
+        <button type="submit" id="login-button">Login</button>
+        <p id="loading-message" style="display: none; color: rgb(26, 255, 0)">Logging in...</p>
+      </form>
+      <p id="login-message" class="form-message"></p>
+      <p class="toggle-link">
+        Trouble logging in? <a id="show-reset-password">Reset your password</a>
+      </p>
+    </div>
+
+    <!-- Reset Password Form -->
+    <div id="reset-password-form-container" style="display: none;">
+      <h1>Reset Password</h1>
+      <form id="reset-password-form">
+        <div class="form-group">
+          <input type="text" id="first-name" name="first-name" placeholder=" " required />
+          <label for="first-name">First Name</label>
+        </div>
+
+        <div class="form-group">
+          <input type="text" id="last-name" name="last-name" placeholder=" " />
+          <label for="last-name">Last Name</label>
+        </div>
+
+        <div class="form-group">
+          <input type="text" id="identifier" name="identifier" placeholder=" " required />
+          <label for="identifier">Username / Email / Mobile no</label>
+        </div>
+
+        <button type="submit" id="reset-password-button">Reset Password</button>
+        <p id="reset-loading-message" style="display: none; color: rgb(42, 210, 0)">Processing your request...</p>
+      </form>
+      <p id="response-message" class="form-message"></p>
+      <p class="toggle-link">
+        Back to - <a id="show-login">Login</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer-a>
+    <p>
+      &copy Copyright under Emmanuel 2025. All rights reserved 
+      <a href="https://www.gu-saurabh.tech/" target="_blank" class="footer-link">Saurabh Kumar</a>
+    </p>
+  </footer-a>
+
+  <script>
+    // Toggle between login and reset password forms
+    document.getElementById("show-reset-password").addEventListener("click", function () {
+      document.getElementById("login-form-container").style.display = "none";
+      document.getElementById("reset-password-form-container").style.display = "block";
+    });
+
+    document.getElementById("show-login").addEventListener("click", function () {
+      document.getElementById("reset-password-form-container").style.display = "none";
+      document.getElementById("login-form-container").style.display = "block";
+    });
+
+    // Login form script
+    document.getElementById("login-form").addEventListener("submit", async function (event) {
+      event.preventDefault();
+      document.getElementById("loading-message").style.display = "block";
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const apiUrl = "http://localhost:3000";
+        const response = await fetch(`${apiUrl}/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        });
+
+        const result = await response.json();
+        document.getElementById("loading-message").style.display = "none";
+        document.getElementById("login-message").textContent = result.message;
+
+        if (result.success) {
+          localStorage.setItem("isLoggedIn", "true");
+          setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 1000);
+        } else {
+          document.getElementById("login-message").style.color = "red";
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        document.getElementById("loading-message").style.display = "none";
+        document.getElementById("login-message").textContent = "Login failed. Please try again.";
+        document.getElementById("login-message").style.color = "red";
+      }
+    });
+
+    // Reset password form script
+    document.getElementById("reset-password-form").addEventListener("submit", async function (event) {
+      event.preventDefault();
+      document.getElementById("reset-loading-message").style.display = "block";
+
+      const firstName = document.getElementById("first-name").value;
+      const lastName = document.getElementById("last-name").value;
+      const identifier = document.getElementById("identifier").value; // Correct field name
+
+      try {
+        const response = await fetch("http://localhost:3000/verify-user", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ firstName, lastName, identifier }), // Correct field names
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Server Error:", errorText);
+          throw new Error(errorText);
+        }
+
+        const result = await response.json();
+        document.getElementById("reset-loading-message").style.display = "none";
+        document.getElementById("response-message").textContent = result.message;
+        document.getElementById("response-message").style.color = result.success ? "green" : "red";
+
+        if (result.success) {
+          const userName = `${firstName} ${lastName}`.trim();
+          setTimeout(() => {
+            window.location.href = `pass-matched.html?name=${encodeURIComponent(userName)}&email=${encodeURIComponent(identifier)}`;
+          }, 1000);
+        }
+      } catch (error) {
+        document.getElementById("reset-loading-message").style.display = "none";
+        console.error("Error:", error);
+        document.getElementById("response-message").textContent = "Failed fetching details. Please check details and try again.";
+        document.getElementById("response-message").style.color = "rgb(215, 0, 0)";
+      }
+    });
+  </script>
+</body>
+
+</html>

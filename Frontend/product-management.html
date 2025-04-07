@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="./styles/product-management.css"> <!-- Link styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script src="scripts/auth.js"></script>
+
+<body>
+    <header>
+        <div class="header-left">
+            <img src="./images/logo-transparent.png" alt="Emmanuel Admin Panel Logo" class="site-logo" />
+            <span class="site-name">
+                <span class="site-name-main">Emmanuel</span>
+                <span class="site-name-sub">Admin</span>
+            </span>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <span class="search-icon"><i class="fas fa-search"></i></span>
+                <input type="text" placeholder="Search" class="search-bar">
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="javascript:void(0)" class="notification-btn"><i class="fa-solid fa-bell"></i><span
+                    class="notification-count"> 3</span>
+                <a href="admin-profile.html" class="profile-btn"><i class="fa-regular fa-user fa-flip"></i></a>
+                <a href="javascript:void(0)" class="logout-btn" onclick="logout()"><i
+                        class="fa-solid fa-right-from-bracket"></i>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><i class="fas fa-tachometer-alt"></i><a href="dashboard.html">Dashboard</a></li>
+            <li><i class="fas fa-box-open"></i><a href="product-management.html" class="active">Products</a></li>
+            <li><i class="fas fa-shopping-cart"></i><a href="order-management.html">Orders</a></li>
+            <li><i class="fas fa-users"></i><a href="customer-management.html">Customers</a></li>
+            <li><i class="fas fa-user-shield"></i><a href="admin-profile.html">Admin Profile</a></li>
+        </ul>
+    </nav>
+
+    <body>
+        <h1>Add Products</h1>
+        <form id="productForm">
+            <label for="productName">Product Name:</label>
+            <input type="text" id="productName" name="productName" required>
+
+            <label for="productBrand">Brand:</label>
+            <input type="text" id="productBrand" name="productBrand" required>
+
+            <label for="productPrice">Price:</label>
+            <input type="number" id="productPrice" name="productPrice" required>
+
+            <label for="productDiscountPrice">Discount Price:</label>
+            <input type="number" id="productDiscountPrice" name="productDiscountPrice">
+
+            <label for="productShippingCharges">Shipping Charges:</label>
+            <input type="number" id="productShippingCharges" name="productShippingCharges">
+
+            <label for="productSpecifications">Specifications:</label>
+            <textarea id="productSpecifications" name="productSpecifications"></textarea>
+
+            <label for="productReturnPolicy">Return Policy:</label>
+            <textarea id="productReturnPolicy" name="productReturnPolicy"></textarea>
+
+            <label for="productImage">Product Image:</label>
+            <input type="file" id="productImage" name="productImage" accept="image/*">
+
+            <div class="button-row">
+                <button type="button" onclick="saveAsDraft()" style="background-color: #f0ad4e; color: white;">Save as
+                    Draft</button>
+                <button type="button" onclick="addProduct()" style="background-color: #5cb85c; color: white;">Add
+                    Product</button>
+                <button type="button" onclick="previewProduct()"
+                    style="background-color: #0275d8; color: white;">Preview</button>
+            </div>
+        </form>
+        <h2>Product List</h2>
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Discount Price</th>
+                    <th>Shipping Charges</th>
+                    <th>Specifications</th>
+                    <th>Return Policy</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>iPhone 14</td>
+                    <td>Apple</td>
+                    <td>999</td>
+                    <td>899</td>
+                    <td>20</td>
+                    <td>128GB, A15 Bionic Chip</td>
+                    <td>Return within 14 days</td>
+                    <td><img src="black.png" alt="Product Image" style="width: 50px; height: 50px;"></td>
+                    <td>
+                        <button onclick="deleteProduct(this)"
+                            style="background-color: #d9534f; color: white;">Delete</button>
+                        <button onclick="updateProduct(this)"
+                            style="background-color: #5bc0de; color: white;">Update</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Galaxy S23</td>
+                    <td>Samsung</td>
+                    <td>799</td>
+                    <td>749</td>
+                    <td>15</td>
+                    <td>256GB, Snapdragon 8 Gen 2</td>
+                    <td>Return within 30 days</td>
+                    <td><img src="black.png" alt="Product Image" style="width: 50px; height: 50px;"></td>
+                    <td>
+                        <button onclick="deleteProduct(this)"
+                            style="background-color: #d9534f; color: white;">Delete</button>
+                        <button onclick="updateProduct(this)"
+                            style="background-color: #5bc0de; color: white;">Update</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Pixel 7</td>
+                    <td>Google</td>
+                    <td>599</td>
+                    <td>549</td>
+                    <td>10</td>
+                    <td>128GB, Google Tensor G2</td>
+                    <td>Return within 15 days</td>
+                    <td><img src="black.png" alt="Product Image" style="width: 50px; height: 50px;"></td>
+                    <td>
+                        <button onclick="deleteProduct(this)"
+                            style="background-color: #d9534f; color: white;">Delete</button>
+                        <button onclick="updateProduct(this)"
+                            style="background-color: #5bc0de; color: white;">Update</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Xperia 1 IV</td>
+                    <td>Sony</td>
+                    <td>1199</td>
+                    <td>1099</td>
+                    <td>25</td>
+                    <td>256GB, 4K OLED Display</td>
+                    <td>Return within 10 days</td>
+                    <td><img src="black.png" alt="Product Image" style="width: 50px; height: 50px;"></td>
+                    <td>
+                        <button onclick="deleteProduct(this)"
+                            style="background-color: #d9534f; color: white;">Delete</button>
+                        <button onclick="updateProduct(this)"
+                            style="background-color: #5bc0de; color: white;">Update</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>OnePlus 11</td>
+                    <td>OnePlus</td>
+                    <td>699</td>
+                    <td>649</td>
+                    <td>20</td>
+                    <td>256GB, Snapdragon 8 Gen 2</td>
+                    <td>Return within 7 days</td>
+                    <td><img src="black.png" alt="Product Image" style="width: 50px; height: 50px;"></td>
+                    <td>
+                        <button onclick="deleteProduct(this)"
+                            style="background-color: #d9534f; color: white;">Delete</button>
+                        <button onclick="updateProduct(this)"
+                            style="background-color: #5bc0de; color: white;">Update</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Redmi Note 12</td>
+                    <td>Xiaomi</td>
+                    <td>299</td>
+                    <td>279</td>
+                    <td>10</td>
+                    <td>128GB, AMOLED Display</td>
+                    <td>Return within 14 days</td>
+                    <td><img src="black.png" alt="Product Image" style="width: 50px; height: 50px;"></td>
+                    <td>
+                        <button onclick="deleteProduct(this)"
+                            style="background-color: #d9534f; color: white;">Delete</button>
+                        <button onclick="updateProduct(this)"
+                            style="background-color: #5bc0de; color: white;">Update</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Find X5 Pro</td>
+                    <td>Oppo</td>
+                    <td>999</td>
+                    <td>949</td>
+                    <td>20</td>
+                    <td>256GB, Hasselblad Camera</td>
+                    <td>Return within 30 days</td>
+                    <td><img src="black.png" alt="Product Image" style="width: 50px; height: 50px;"></td>
+                    <td>
+                        <button onclick="deleteProduct(this)"
+                            style="background-color: #d9534f; color: white;">Delete</button>
+                        <button onclick="updateProduct(this)"
+                            style="background-color: #5bc0de; color: white;">Update</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Vivo X90</td>
+                    <td>Vivo</td>
+                    <td>799</td>
+                    <td>749</td>
+                    <td>15</td>
+                    <td>256GB, Zeiss Optics</td>
+                    <td>Return within 20 days</td>
+                    <td><img src="black.png" alt="Product Image" style="width: 50px; height: 50px;"></td>
+                    <td>
+                        <button onclick="deleteProduct(this)"
+                            style="background-color: #d9534f; color: white;">Delete</button>
+                        <button onclick="updateProduct(this)"
+                            style="background-color: #5bc0de; color: white;">Update</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Realme GT 3</td>
+                    <td>Realme</td>
+                    <td>499</td>
+                    <td>469</td>
+                    <td>10</td>
+                    <td>128GB, 240W Charging</td>
+                    <td>Return within 7 days</td>
+                    <td><img src="black.png" alt="Product Image" style="width: 50px; height: 50px;"></td>
+                    <td>
+                        <button onclick="deleteProduct(this)"
+                            style="background-color: #d9534f; color: white;">Delete</button>
+                        <button onclick="updateProduct(this)"
+                            style="background-color: #5bc0de; color: white;">Update</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Razor Phone 2</td>
+                    <td>Razer</td>
+                    <td>699</td>
+                    <td>649</td>
+                    <td>15</td>
+                    <td>64GB, 120Hz Display</td>
+                    <td>Return within 10 days</td>
+                    <td><img src="black.png" alt="Product Image" style="width: 50px; height: 50px;"></td>
+                    <td>
+                        <button onclick="deleteProduct(this)"
+                            style="background-color: #d9534f; color: white;">Delete</button>
+                        <button onclick="updateProduct(this)"
+                            style="background-color: #5bc0de; color: white;">Update</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            const productTable = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+
+            function addProduct() {
+                const name = document.getElementById('productName').value;
+                const brand = document.getElementById('productBrand').value;
+                const price = document.getElementById('productPrice').value;
+                const discountPrice = document.getElementById('productDiscountPrice').value;
+                const shippingCharges = document.getElementById('productShippingCharges').value;
+                const specifications = document.getElementById('productSpecifications').value;
+                const returnPolicy = document.getElementById('productReturnPolicy').value;
+                const image = document.getElementById('productImage').files[0];
+
+                if (name && brand && price) {
+                    const row = productTable.insertRow();
+                    const imageUrl = image ? URL.createObjectURL(image) : '';
+
+                    row.innerHTML = `
+                    <td>${name}</td>
+                    <td>${brand}</td>
+                    <td>${price}</td>
+                    <td>${discountPrice}</td>
+                    <td>${shippingCharges}</td>
+                    <td>${specifications}</td>
+                    <td>${returnPolicy}</td>
+                    <td><img src="${imageUrl}" alt="Product Image" style="width: 50px; height: 50px;"></td>
+                    <td>
+                        <button onclick="deleteProduct(this)" style="background-color: #d9534f; color: white;">Delete</button>
+                        <button onclick="updateProduct(this)" style="background-color: #5bc0de; color: white;">Update</button>
+                    </td>
+                `;
+                    document.getElementById('productForm').reset();
+                } else {
+                    alert('Please fill in all required fields.');
+                }
+            }
+
+            function saveAsDraft() {
+                alert('Product saved as draft.');
+            }
+
+            function previewProduct() {
+                const name = document.getElementById('productName').value;
+                const brand = document.getElementById('productBrand').value;
+                const price = document.getElementById('productPrice').value;
+                const discountPrice = document.getElementById('productDiscountPrice').value;
+                const shippingCharges = document.getElementById('productShippingCharges').value;
+                const specifications = document.getElementById('productSpecifications').value;
+                const returnPolicy = document.getElementById('productReturnPolicy').value;
+
+                if (name && brand && price) {
+                    alert(`
+                    Product Preview:
+                    Name: ${name}
+                    Brand: ${brand}
+                    Price: ${price}
+                    Discount Price: ${discountPrice || 'N/A'}
+                    Shipping Charges: ${shippingCharges || 'N/A'}
+                    Specifications: ${specifications || 'N/A'}
+                    Return Policy: ${returnPolicy || 'N/A'}
+                `);
+                } else {
+                    alert('Please fill in all required fields to preview the product.');
+                }
+            }
+
+            function deleteProduct(button) {
+                const row = button.parentElement.parentElement;
+                productTable.deleteRow(row.rowIndex - 1);
+            }
+
+            function updateProduct(button) {
+                const row = button.parentElement.parentElement;
+
+                // Populate form fields with the selected row's data
+                document.getElementById('productName').value = row.cells[0].innerText;
+                document.getElementById('productBrand').value = row.cells[1].innerText;
+                document.getElementById('productPrice').value = row.cells[2].innerText;
+                document.getElementById('productDiscountPrice').value = row.cells[3].innerText;
+                document.getElementById('productShippingCharges').value = row.cells[4].innerText;
+                document.getElementById('productSpecifications').value = row.cells[5].innerText;
+                document.getElementById('productReturnPolicy').value = row.cells[6].innerText;
+
+                // Remove the selected row from the table
+                productTable.deleteRow(row.rowIndex - 1);
+            }
+            function logout() {
+                // Clear all session and local storage
+                sessionStorage.clear();
+                localStorage.clear();
+
+                // Redirect to login page
+                window.location.href = "index.html";
+            }
+
+        </script>
+    </body>
+
+</html>

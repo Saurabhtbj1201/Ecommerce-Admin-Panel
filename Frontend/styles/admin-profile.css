@@ -1,0 +1,118 @@
+/* admin-profile.css */
+body h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2em;
+    color: #333;
+    font-weight: bold; /* Ensure the heading is bold */
+}
+
+.profile-details, .actions {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-details h2, .actions h2 {
+    margin-top: 0;
+}
+
+button.active {
+    background-color: green;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer; /* Add pointer cursor for active buttons */
+}
+
+.follow-me {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.follow-me .social-media-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap; /* Ensure proper alignment on smaller screens */
+}
+
+.follow-me .social-icon {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add smooth shadow transition */
+}
+
+.follow-me .social-icon:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow effect on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .profile-details {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-photo-box {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-info {
+        flex: unset;
+        width: 100%;
+    }
+
+    .actions {
+        text-align: center;
+    }
+
+    .actions button {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .follow-me .social-media-links {
+        gap: 0.5rem;
+    }
+
+    .follow-me .social-icon {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    body h1 {
+        font-size: 1.5em;
+    }
+
+    .profile-photo-box {
+        width: 100px;
+        height: 100px;
+    }
+
+    .follow-me .social-icon {
+        width: 25px;
+        height: 25px;
+    }
+    .follow-me .social-icon {
+        width: 20px;
+        height: 20px;
+    }
+}

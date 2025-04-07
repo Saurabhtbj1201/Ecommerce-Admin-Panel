@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Profile</title>
+  <link rel="stylesheet" href="./styles/admin-profile.css" />
+  <link rel="stylesheet" href="./styles/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script src="scripts/auth.js"></script>
+
+  <!-- Link dashboard-specific styles -->
+
+<body>
+  <header>
+    <div class="header-left">
+      <img src="./images/logo-transparent.png" alt="Emmanuel Admin Panel Logo" class="site-logo" />
+      <span class="site-name">
+        <span class="site-name-main">Emmanuel</span>
+        <span class="site-name-sub">Admin</span>
+      </span>
+    </div>
+    <div class="header-center">
+      <div class="search-container">
+        <span class="search-icon"><i class="fas fa-search"></i></span>
+        <input type="text" placeholder="Search" class="search-bar">
+      </div>
+    </div>
+    <div class="header-right">
+      <a href="javascript:void(0)" class="notification-btn"><i class="fa-solid fa-bell"></i><span
+          class="notification-count"> 3</span>
+        <a href="admin-profile.html" class="profile-btn"><i class="fa-regular fa-user fa-flip"></i></a>
+        <a href="javascript:void(0)" class="logout-btn" onclick="logout()"><i
+            class="fa-solid fa-right-from-bracket"></i>
+    </div>
+  </header>
+  <nav>
+    <ul>
+      <li><i class="fas fa-tachometer-alt"></i><a href="dashboard.html">Dashboard</a></li>
+      <li><i class="fas fa-box-open"></i><a href="product-management.html">Products</a></li>
+      <li><i class="fas fa-shopping-cart"></i><a href="order-management.html">Orders</a></li>
+      <li><i class="fas fa-users"></i><a href="customer-management.html">Customers</a></li>
+      <li><i class="fas fa-user-shield"></i><a href="admin-profile.html" class="active">Admin Profile</a></li>
+    </ul>
+  </nav>
+  <!-- Main Dashboard Content -->
+  <h1>Admin Profile</h1>
+  <main>
+    <section class="profile-details">
+      <div class="profile-photo-box" style="width: 150px; height: 150px">
+        <img src="./images/logo.png" alt="Profile Photo" class="profile-photo" id="profilePhoto"
+          style="width: 100%; height: 100%; object-fit: cover" />
+        <input type="file" id="photoInput" style="display: none" accept="image/*" onchange="previewPhoto(event)" />
+        <button onclick="document.getElementById('photoInput').click()" style="
+              background-color: #307974;
+              color: white;
+              padding: 4px 8px;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+              font-size: 12px;
+              margin-top: 3px;
+            ">
+          Change Photo
+        </button>
+      </div>
+      <div class="profile-info">
+        <h2>
+          <span id="adminName">Saurabh Kumar</span>
+          <span class="verified-badge">✔</span>
+        </h2>
+        <p id="adminRole">Admin</p>
+        <div class="contact-details">
+          <p>
+            <strong>Email:</strong>
+            <span id="adminEmail">contact@gu-saurabh.tech</span>
+          </p>
+          <p>
+            <strong>Phone:</strong>
+            <span id="adminPhone">+91 9798024301</span>
+          </p>
+        </div>
+        <div class="address">
+          <p>
+            <strong>Address:</strong>
+            <span id="adminAddress">Sector 16, Noida, 201301, INDIA </span>
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="actions">
+      <h2>Actions</h2>
+      <button onclick="enableEdit()" style="
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          ">
+        Edit Profile
+      </button>
+      <button onclick="saveProfile()" style="
+            background-color: #008cba;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          ">
+        Save
+      </button>
+      <button id="logout-button" style="
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          ">
+        Logout
+      </button>
+    </section>
+    <section class="follow-me">
+      <h2>Follow Me On</h2>
+      <div class="social-media-links">
+        <a href="https://linkedin.com/in/Saurabhtbj1201" target="_blank">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn"
+            class="social-icon" />
+        </a>
+        <a href="https://github.com/saurabhtbj1201" target="_blank">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" class="social-icon" />
+        </a>
+        <a href="https://instagram.com/saurabhtbj1201" target="_blank">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram"
+            class="social-icon" />
+        </a>
+        <a href="https://x.com/saurabhtbj1201" target="_blank">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg" alt="X (Twitter)" class="social-icon" />
+        </a>
+        <a href="https://www.facebook.com/Saurabhtbj1201" target="_blank">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook"
+            class="social-icon" />
+        </a>
+      </div>
+    </section>
+  </main>
+  <script>
+    document
+      .getElementById("logout-button")
+      .addEventListener("click", function () {
+        // Clear all session and local storage
+        sessionStorage.clear();
+        localStorage.clear();
+
+        // Redirect to login page
+        window.location.href = "index.html";
+      });
+
+    // Prevent navigating back to the dashboard after logout
+    window.addEventListener("pageshow", function (event) {
+      if (event.persisted || window.performance.navigation.type === 2) {
+        sessionStorage.clear();
+        localStorage.clear();
+        window.location.href = "index.html";
+      }
+    });
+
+    function enableEdit() {
+      const fields = [
+        "adminName",
+        "adminRole",
+        "adminEmail",
+        "adminPhone",
+        "adminAddress",
+      ];
+      fields.forEach((field) => {
+        const element = document.getElementById(field);
+        const value = element.innerText;
+        element.innerHTML = `<input type="text" value="${value}" id="${field}Input">`;
+      });
+    }
+
+    function saveProfile() {
+      const fields = [
+        "adminName",
+        "adminRole",
+        "adminEmail",
+        "adminPhone",
+        "adminAddress",
+      ];
+      fields.forEach((field) => {
+        const inputElement = document.getElementById(`${field}Input`);
+        if (inputElement) {
+          document.getElementById(field).innerText = inputElement.value;
+        }
+      });
+    }
+
+    function previewPhoto(event) {
+      const photo = document.getElementById("profilePhoto");
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          photo.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+  // Initialize logout button
+  fetchOrders();
+  function logout() {
+  // Clear all session and local storage
+  sessionStorage.clear();
+  localStorage.clear();
+
+  // Redirect to login page
+  window.location.href = "index.html";
+  }
+  <!-- Footer -->
+</script>
+
+  <footer>
+    <p>
+      &copy Copyright under Emmanuel 2025. All rights reserved 
+      <a href="https://www.gu-saurabh.tech/" target="_blank" class="footer-link">Saurabh Kumar</a>
+    </p>
+  </footer>
+</body>
+
+</html>

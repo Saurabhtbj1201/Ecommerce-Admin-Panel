@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="./styles/styles.css" />
+  <link rel="stylesheet" href="./styles/customer-management.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Link dashboard-specific styles -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="scripts/auth.js"></script>
+
+</head>
+
+<body>
+  <header>
+    <div class="header-left">
+      <img src="./images/logo-transparent.png" alt="Emmanuel Admin Panel Logo" class="site-logo" />
+      <span class="site-name">
+        <span class="site-name-main">Emmanuel</span>
+        <span class="site-name-sub">Admin</span>
+      </span>
+    </div>
+    <div class="header-center">
+      <div class="search-container">
+        <span class="search-icon"><i class="fas fa-search"></i></span>
+        <input type="text" placeholder="Search" class="search-bar">
+      </div>
+    </div>
+    <div class="header-right">
+      <a href="javascript:void(0)" class="notification-btn"><i class="fa-solid fa-bell"></i><span
+          class="notification-count"> 3</span>
+        <a href="admin-profile.html" class="profile-btn"><i class="fa-regular fa-user fa-flip"></i></a>
+        <a href="javascript:void(0)" class="logout-btn" onclick="logout()"><i
+            class="fa-solid fa-right-from-bracket"></i>
+    </div>
+  </header>
+  <nav>
+    <ul>
+      <li><i class="fas fa-tachometer-alt"></i><a href="dashboard.html">Dashboard</a></li>
+      <li><i class="fas fa-box-open"></i><a href="product-management.html">Products</a></li>
+      <li><i class="fas fa-shopping-cart"></i><a href="order-management.html">Orders</a></li>
+      <li><i class="fas fa-users"></i><a href="customer-management.html" class="active">Customers</a></li>
+      <li><i class="fas fa-user-shield"></i><a href="admin-profile.html">Admin Profile</a></li>
+    </ul>
+  </nav>
+  <!-- Main Dashboard Content -->
+  <main>
+    <div class="button-container">
+      <button id="addCustomerButton">Add Customer</button>
+      <button id="exportButton">Download Customers Data</button>
+    </div>
+    <h1>Customer Management</h1>
+
+    <!-- Active Customers Section -->
+    <div id="activeCustomers" class="category-container">
+      <div class="grid-container"></div>
+    </div>
+
+    <script>
+      const SHEET_ID = "1YpIkY-H89itSSItBzuR0CthPhExj73tJcnfUW5znoRE";
+      const API_KEY = "AIzaSyBkvAy1Cg042gE7XtUaB5R4NienKvd7nE8";
+      const SHEET_RANGE = "Sheet1!A:Z";
+
+      async function fetchCustomerData() {
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_RANGE}?key=${API_KEY}`;
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          const rows = data.values;
+
+          if (rows && rows.length > 1) {
+            populateCustomerContainer(rows.slice(1)); // Skip header row
+          }
+        } catch (error) {
+          console.error("Error fetching customer data:", error);
+        }
+      }
+
+      function populateCustomerContainer(rows) {
+        const container = document.querySelector("#activeCustomers .grid-container");
+        container.innerHTML = ""; // Clear existing content
+
+        rows.forEach(row => {
+          const customerDiv = document.createElement("div");
+          customerDiv.className = "customer-container";
+
+          customerDiv.innerHTML = `
+              <p><strong>ID:</strong> ${row[0] || ""}</p>
+              <p><strong>Name:</strong> ${row[1] || ""}</p>
+              <p><strong>Email:</strong> ${row[2] || ""}</p>
+              <p><strong>Phone:</strong> ${row[3] || ""}</p>
+              <div class="button-container">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </div>
+            `;
+
+          container.appendChild(customerDiv);
+        });
+      }
+
+      async function exportCustomerData() {
+        try {
+          const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_RANGE}?key=${API_KEY}`;
+          const response = await fetch(url);
+          const data = await response.json();
+          const rows = data.values;
+
+          if (!rows || rows.length === 0) {
+            alert("No data available to export.");
+            return;
+          }
+
+          // Create a CSV string from rows
+          const csvContent = rows.map(row => row.map(cell => `"${cell || ""}"`).join(",")).join("\n");
+
+          // Convert CSV to a Blob and create a downloadable link
+          const blob = new Blob([csvContent], { type: "text/csv" });
+          const link = document.createElement("a");
+          link.href = URL.createObjectURL(blob);
+          link.download = "customers.csv";
+          link.click();
+        } catch (error) {
+          console.error("Error exporting customer data:", error);
+          alert("Failed to export customer data.");
+        }
+      }
+
+      // Add event listener to export button
+      document.getElementById("exportButton").addEventListener("click", exportCustomerData);
+
+      // Fetch data when the page loads
+      document.addEventListener("DOMContentLoaded", fetchCustomerData);
+      // Initialize logout button
+      fetchOrders();
+      function logout() {
+        // Clear all session and local storage
+        sessionStorage.clear();
+        localStorage.clear();
+
+        // Redirect to login page
+        window.location.href = "index.html";
+      }
+    </script>
+
+  </main>
+</body>
+
+</html>

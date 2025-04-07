@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Management</title>
+  <link rel="stylesheet" href="./styles/styles.css" />
+  <link rel="stylesheet" href="./styles/order-management.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script src="scripts/auth.js"></script>
+
+</head>
+
+<body>
+  <header>
+    <div class="header-left">
+      <img src="./images/logo-transparent.png" alt="Emmanuel Admin Panel Logo" class="site-logo" />
+      <span class="site-name">
+        <span class="site-name-main">Emmanuel</span>
+        <span class="site-name-sub">Admin</span>
+      </span>
+    </div>
+    <div class="header-center">
+      <div class="search-container">
+        <span class="search-icon"><i class="fas fa-search"></i></span>
+        <input type="text" placeholder="Search" class="search-bar">
+      </div>
+    </div>
+    <div class="header-right">
+      <a href="javascript:void(0)" class="notification-btn"><i class="fa-solid fa-bell"></i><span
+          class="notification-count"> 3</span>
+        <a href="admin-profile.html" class="profile-btn"><i class="fa-regular fa-user fa-flip"></i></a>
+        <a href="javascript:void(0)" class="logout-btn" onclick="logout()"><i
+            class="fa-solid fa-right-from-bracket"></i>
+    </div>
+  </header>
+  <nav>
+    <ul>
+      <li><i class="fas fa-tachometer-alt"></i><a href="dashboard.html">Dashboard</a></li>
+      <li><i class="fas fa-box-open"></i><a href="product-management.html">Products</a></li>
+      <li><i class="fas fa-shopping-cart"></i><a href="order-management.html" class="active">Orders</a></li>
+      <li><i class="fas fa-users"></i><a href="customer-management.html">Customers</a></li>
+      <li><i class="fas fa-user-shield"></i><a href="admin-profile.html">Admin Profile</a></li>
+    </ul>
+  </nav>
+
+  <body>
+    <main>
+      <div class="button-container">
+        <button id="allButton" onclick="location.href='./order-management-all.html'">
+          All orders
+        </button>
+        <button id="reportButton" onclick="window.location.href='#'">
+          See Reports
+        </button>
+      </div>
+
+      <!-- Orders Table -->
+      <div id="orders-container">
+        <h1>Running Orders</h1>
+        <table id="orders-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Order Details</th>
+              <th>Product Prices</th>
+              <th>Order Date and Time</th>
+              <th>Payment Method</th>
+              <th>Payment Status</th>
+              <th>Order Status</th>
+              <th>Tracking Number</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Orders will be dynamically inserted here -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Delivered Orders Table -->
+      <div id="delivered-orders-container">
+        <h1>Delivered Orders</h1>
+        <table id="delivered-orders-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Order Details</th>
+              <th>Product Prices</th>
+              <th>Order Date and Time</th>
+              <th>Payment Method</th>
+              <th>Payment Status</th>
+              <th>Tracking Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Delivered orders will be dynamically inserted here -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Cancelled Orders Table -->
+      <div id="cancelled-orders-container">
+        <h1>Cancelled Orders</h1>
+        <table id="cancelled-orders-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Order Details</th>
+              <th>Product Prices</th>
+              <th>Order Date and Time</th>
+              <th>Payment Method</th>
+              <th>Payment Status</th>
+              <th>Tracking Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Cancelled orders will be dynamically inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <script>
+
+      const SPREADSHEET_ID = "1Gc6zOdfoo4cdhcfiySwws7Qxt6BAPMVMO66aBDvLkcA";
+      const API_KEY = "AIzaSyDmzg9ncuWxWSHrW_Pj9QVGxMgzagFSwTk";
+      const SHEET_NAME = "order_data"; // Replace with your sheet name
+      const API_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
+
+      // Fetch orders from Google Sheets
+      async function fetchOrders() {
+        try {
+          const response = await fetch(API_URL);
+          const data = await response.json();
+          const rows = data.values;
+
+          if (rows && rows.length > 1) {
+            renderOrders(rows);
+          } else {
+            document.querySelector("#orders-container").innerHTML =
+              "<p>No orders found.</p>";
+          }
+        } catch (error) {
+          console.error("Error fetching orders:", error);
+          document.querySelector("#orders-container").innerHTML =
+            "<p>Error loading orders. Please try again later.</p>";
+        }
+      }
+
+      // Render orders in the table
+      function renderOrders(rows) {
+        const tableBody = document.querySelector("#orders-table tbody");
+        const deliveredTableBody = document.querySelector(
+          "#delivered-orders-table tbody"
+        );
+        const cancelledTableBody = document.querySelector(
+          "#cancelled-orders-table tbody"
+        );
+
+        tableBody.innerHTML = ""; // Clear existing rows
+        deliveredTableBody.innerHTML = ""; // Clear delivered orders
+        cancelledTableBody.innerHTML = ""; // Clear cancelled orders
+
+        rows.slice(1).forEach((row, index) => {
+          const [
+            orderId,
+            orderDetails,
+            productPrices,
+            orderDateTime,
+            paymentMethod,
+            paymentStatus,
+            orderStatus,
+            trackingNumber,
+          ] = row;
+
+          const normalizedStatus = orderStatus.trim().toLowerCase(); // Trim and normalize status for case-insensitive comparison
+
+          if (normalizedStatus === "cancelled") {
+            // Fix comparison for "Cancelled"
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${orderId}</td>
+              <td>${orderDetails}</td>
+              <td>${productPrices}</td>
+              <td>${orderDateTime}</td>
+              <td>${paymentMethod}</td>
+              <td>${paymentStatus}</td>
+              <td>${trackingNumber}</td>
+            `;
+            cancelledTableBody.appendChild(tr);
+            return;
+          }
+
+          if (normalizedStatus === "delivered") {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${orderId}</td>
+              <td>${orderDetails}</td>
+              <td>${productPrices}</td>
+              <td>${orderDateTime}</td>
+              <td>${paymentMethod}</td>
+              <td>${paymentStatus}</td>
+              <td>${trackingNumber}</td>
+            `;
+            deliveredTableBody.appendChild(tr);
+            return;
+          }
+
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${orderId}</td>
+            <td>${orderDetails}</td>
+            <td>${productPrices}</td>
+            <td>${orderDateTime}</td>
+            <td>${paymentMethod}</td>
+            <td>${paymentStatus}</td>
+            <td>
+              <select class="status-dropdown" data-index="${index}">
+                <option value="Pending" ${orderStatus === "Pending" ? "selected" : ""
+            }>Pending</option>
+                <option value="Accepted" ${orderStatus === "Accepted" ? "selected" : ""
+            }>Accepted</option>
+                <option value="Shipped" ${orderStatus === "Shipped" ? "selected" : ""
+            }>Shipped</option>
+                <option value="Transit" ${orderStatus === "Transit" ? "selected" : ""
+            }>Transit</option>
+                <option value="Delivered" ${orderStatus === "Delivered" ? "selected" : ""
+            }>Delivered</option>
+                <option value="Cancelled" ${orderStatus === "Cancelled" ? "selected" : ""
+            }>Cancelled</option>
+              </select>
+            </td>
+            <td><input type="text" class="tracking-input" value="${trackingNumber}" data-index="${index}" /></td>
+            <td><button class="update-btn" data-index="${index}">Update</button></td>
+          `;
+          tableBody.appendChild(tr);
+        });
+      }
+
+      // Initialize logout button
+      fetchOrders();
+      function logout() {
+        // Clear all session and local storage
+        sessionStorage.clear();
+        localStorage.clear();
+
+        // Redirect to login page
+        window.location.href = "index.html";
+      }
+
+    </script>
+  </body>
+
+</html>

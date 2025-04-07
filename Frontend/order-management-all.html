@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Management</title>
+  <link rel="stylesheet" href="./styles/styles.css" />
+  <link rel="stylesheet" href="./styles/order-management-all.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="scripts/auth.js"></script>
+
+<body>
+  <header>
+    <div class="header-left">
+      <img src="./images/logo-transparent.png" alt="Emmanuel Admin Panel Logo" class="site-logo" />
+      <span class="site-name">
+        <span class="site-name-main">Emmanuel</span>
+        <span class="site-name-sub">Admin</span>
+      </span>
+    </div>
+    <div class="header-center">
+      <div class="search-container">
+        <span class="search-icon"><i class="fas fa-search"></i></span>
+        <input type="text" placeholder="Search" class="search-bar">
+      </div>
+    </div>
+    <div class="header-right">
+      <a href="javascript:void(0)" class="notification-btn"><i class="fa-solid fa-bell"></i><span
+          class="notification-count"> 3</span>
+        <a href="admin-profile.html" class="profile-btn"><i class="fa-regular fa-user fa-flip"></i></a>
+        <a href="javascript:void(0)" class="logout-btn" onclick="logout()"><i
+            class="fa-solid fa-right-from-bracket"></i>
+    </div>
+  </header>
+  <nav>
+    <ul>
+      <li><i class="fas fa-tachometer-alt"></i><a href="dashboard.html" class="active">Dashboard</a></li>
+      <li><i class="fas fa-box-open"></i><a href="product-management.html">Products</a></li>
+      <li><i class="fas fa-shopping-cart"></i><a href="order-management.html" class="active">Orders</a></li>
+      <li><i class="fas fa-users"></i><a href="customer-management.html">Customers</a></li>
+      <li><i class="fas fa-user-shield"></i><a href="admin-profile.html">Admin Profile</a></li>
+    </ul>
+  </nav>
+
+  <body>
+    <main>
+      <div class="button-container">
+        <button id="updateButton" onclick="window.location.href='order-management.html'">Update orders</button>
+        <button id="reportButton">See Reports</button>
+        <button id="exportButton">Export Data</button>
+      </div>
+      <h1>All orders list</h1>
+
+      <div id="errorOutput" style="color: red"></div>
+
+      <!-- Containers for categorized orders -->
+      <div id="pendingOrders" class="category-container">
+        <h2>Pending Orders</h2>
+        <div class="grid-container"></div>
+      </div>
+      <div id="acceptedOrders" class="category-container">
+        <h2>Accepted Orders</h2>
+        <div class="grid-container"></div>
+      </div>
+      <div id="transitOrders" class="category-container">
+        <h2>Transit Orders</h2>
+        <div class="grid-container"></div>
+      </div>
+      <div id="shippedOrders" class="category-container">
+        <h2>Shipped Orders</h2>
+        <div class="grid-container"></div>
+      </div>
+      <div id="deliveredOrders" class="category-container">
+        <h2>Delivered Orders</h2>
+        <div class="grid-container"></div>
+      </div>
+      <div id="cancelledOrders" class="category-container">
+        <h2>Cancelled Orders</h2>
+        <div class="grid-container"></div>
+      </div>
+
+      <script>
+        const API_KEY = "AIzaSyDmzg9ncuWxWSHrW_Pj9QVGxMgzagFSwTk"; // Replace with your API key
+        const SPREADSHEET_ID = "1Gc6zOdfoo4cdhcfiySwws7Qxt6BAPMVMO66aBDvLkcA"; // Replace with your Spreadsheet ID
+        const RANGE = "order_data!A:Z"; // Fetch all rows and columns dynamically
+
+        async function fetchData() {
+          const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+          try {
+            const response = await fetch(url);
+            if (!response.ok) {
+              const errorDetails = await response.json(); // Fetch error details as JSON
+              if (
+                errorDetails.error &&
+                errorDetails.error.status === "PERMISSION_DENIED"
+              ) {
+                throw new Error(
+                  "Permission denied. Ensure the Google Sheet is shared with 'Anyone with the link' or check API key permissions."
+                );
+              }
+              throw new Error(
+                `HTTP error! status: ${response.status
+                }, details: ${JSON.stringify(errorDetails)}`
+              );
+            }
+            const data = await response.json();
+            console.log("Fetched data:", data); // Log fetched data
+            if (!data.values || data.values.length === 0) {
+              throw new Error("No data found in the specified range.");
+            }
+            populateContainers(data.values);
+            document.getElementById("errorOutput").textContent = ""; // Clear error messages
+          } catch (error) {
+            console.error("Error fetching data:", error);
+            document.getElementById(
+              "errorOutput"
+            ).textContent = `Error: ${error.message}`;
+          }
+        }
+
+        function populateContainers(rows) {
+          const categories = {
+            Pending: document.querySelector("#pendingOrders .grid-container"),
+            Accepted: document.querySelector("#acceptedOrders .grid-container"),
+            Transit: document.querySelector("#transitOrders .grid-container"),
+            Shipped: document.querySelector("#shippedOrders .grid-container"),
+            Delivered: document.querySelector("#deliveredOrders .grid-container"),
+            Cancelled: document.querySelector("#cancelledOrders .grid-container"),
+          };
+
+          // Clear existing content in all categories
+          Object.values(categories).forEach(container => (container.innerHTML = ""));
+
+          rows.forEach((row, index) => {
+            if (index === 0) return; // Skip header row
+
+            const orderDiv = document.createElement("div");
+            orderDiv.className = "order-container";
+
+            // Image container
+            const imageDiv = document.createElement("div");
+            const imageUrl =
+              row[11] &&
+                (row[11].endsWith(".png") ||
+                  row[11].endsWith(".jpg") ||
+                  row[11].endsWith(".jpeg") ||
+                  row[11].startsWith("http"))
+                ? row[11]
+                : "placeholder.png";
+            imageDiv.innerHTML = `<img src="${imageUrl}" alt="Product Image" style="width: 100px; height: auto;">`;
+
+            // Text container
+            const textDiv = document.createElement("div");
+            textDiv.innerHTML = `
+            <p><strong>S.No. :</strong> ${index || ""}</p>
+            <p><strong>Order ID:</strong> ${row[0] || ""}</p>
+            <p><strong>Product Name:</strong> ${row[1] || ""}</p>
+            <p><strong>Product Prices:</strong> ${row[2] || ""}</p>
+            <p><strong>Order Date and Time:</strong> ${row[3] || ""}</p>
+            <p><strong>Payment Method:</strong> ${row[4] || ""}</p>
+            <p><strong>Payment Status:</strong> ${row[5] || ""}</p>
+            <p><strong>Shipping Status:</strong> ${row[6] || ""}</p>
+            <p><strong>Tracking Number:</strong> ${row[7] || ""}</p>
+            <p><strong>Discount Applied:</strong> ${row[8] || ""}</p>
+            <p><strong>Tax Amount:</strong> ${row[9] || ""}</p>
+          `;
+
+            orderDiv.appendChild(imageDiv);
+            orderDiv.appendChild(textDiv);
+
+            // Normalize status for case-insensitive comparison
+            const orderStatus = row[6] || "Pending";
+            const normalizedStatus = orderStatus.trim().toLowerCase();
+
+            if (normalizedStatus === "cancelled" || normalizedStatus === "canceled") {
+              categories["Cancelled"].appendChild(orderDiv); // Fix for "Cancelled" orders
+            } else if (categories[orderStatus]) {
+              categories[orderStatus].appendChild(orderDiv);
+            }
+          });
+        }
+
+        function exportDataToExcel(rows) {
+          if (!rows || rows.length === 0) {
+            alert("No data available to export.");
+            return;
+          }
+
+          // Create a CSV string from rows
+          let csvContent = rows.map(row => row.map(cell => `"${cell || ""}"`).join(",")).join("\n");
+
+          // Convert CSV to a Blob and create a downloadable link
+          const blob = new Blob([csvContent], { type: "text/csv" });
+          const link = document.createElement("a");
+          link.href = URL.createObjectURL(blob);
+          link.download = "orders.csv";
+          link.click();
+        }
+
+        document.getElementById("exportButton").addEventListener("click", async () => {
+          try {
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+            const response = await fetch(url);
+            if (!response.ok) {
+              throw new Error("Failed to fetch data for export.");
+            }
+            const data = await response.json();
+            if (!data.values || data.values.length === 0) {
+              throw new Error("No data available for export.");
+            }
+            exportDataToExcel(data.values);
+          } catch (error) {
+            console.error("Error exporting data:", error);
+            alert(`Error exporting data: ${error.message}`);
+          }
+        });
+
+        // Automatically fetch data when the page loads
+        window.addEventListener("DOMContentLoaded", fetchData);
+
+        document
+          .getElementById("reportButton")
+          .addEventListener("click", fetchData);
+
+        document.getElementById("exportButton").addEventListener("click", exportDataToPDF);
+
+        // Initialize logout button
+        fetchOrders();
+        function logout() {
+          // Clear all session and local storage
+          sessionStorage.clear();
+          localStorage.clear();
+
+          // Redirect to login page
+          window.location.href = "index.html";
+        }
+      </script>
+    </main>
+  </body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel Login</title>
+  <link rel="stylesheet" href="./styles/styles.css" />
+  <link rel="stylesheet" href="./styles/pass-matched.css" />
+</head>
+
+<body style="background-image: url('./images/bg.jpg')">
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <img src="./images/logo-transparent.png" alt="Emmanuel Admin Panel Logo" class="site-logo" />
+      <span class="site-name">
+        <span class="site-name-main">Emmanuel</span>
+        <span class="site-name-sub">Admin</span>
+      </span>
+    </div>
+  </header>
+
+  <!-- Welcome Message -->
+  <section id="welcome-message-container">
+    <h1 id="welcome-message"></h1>
+  </section>
+
+  <!-- Change Password Container -->
+  <section class="change-password-container">
+    <h2>Change Password</h2>
+    <form id="change-password-form">
+      <div class="form-group">
+        <input type="password" id="new-password" name="new-password" placeholder=" " required />
+        <label for="new-password">Create New Password</label>
+      </div>
+      <div class="form-group">
+        <input type="password" id="confirm-password" name="confirm-password" placeholder=" " required />
+        <label for="confirm-password">Confirm Password</label>
+      </div>
+      <button type="submit" id="change-password-button">Submit</button>
+      <button type="button" id="cancel-button" onclick="window.location.href='index.html'">
+        Cancel
+      </button>
+      <p id="change-password-message" style="display: none"></p>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      &copy Copyright under Emmanuel 2025. All rights reserved <a href="https://www.gu-saurabh.tech/" target="_blank" class="footer-link">
+        Saurabh Kumar</a>
+    </p>
+  </footer>
+
+  <script>
+    // Redirect to index.html on page reload
+    if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+      window.location.href = "index.html";
+    }
+
+    // Fetch user data from query parameters or server
+    const urlParams = new URLSearchParams(window.location.search);
+    const userName = urlParams.get("name"); // Assuming 'name' is passed in the query string
+
+    // Display welcome message
+    if (userName) {
+      const welcomeMessageElement =
+        document.getElementById("welcome-message");
+      welcomeMessageElement.textContent = `Welcome, ${userName}!`;
+      welcomeMessageElement.style.color = "#4CAF50"; // Green color for welcome message
+      welcomeMessageElement.style.fontWeight = "bold";
+
+      const welcomeMessageContainer = document.getElementById(
+        "welcome-message-container"
+      );
+      const additionalMessage = document.createElement("p");
+      additionalMessage.textContent =
+        "Your details are verified successfully! Please create a new password and login.";
+      additionalMessage.style.color = "#2196F3"; // Blue color for additional message
+      additionalMessage.style.fontStyle = "italic";
+      welcomeMessageContainer.appendChild(additionalMessage);
+    }
+
+    // Handle Change Password Form Submission
+    document
+      .getElementById("change-password-form")
+      .addEventListener("submit", async function (event) {
+        event.preventDefault();
+        document.getElementById("change-password-message").style.display =
+          "block";
+
+        const newPassword = document.getElementById("new-password").value;
+        const confirmPassword =
+          document.getElementById("confirm-password").value;
+
+        // Fetch email from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get("email");
+
+        if (!email) {
+          document.getElementById("change-password-message").textContent =
+            "Error: Email not found. Please restart the password reset process.";
+          return;
+        }
+
+        if (newPassword !== confirmPassword) {
+          document.getElementById("change-password-message").textContent =
+            "Passwords do not match!";
+          return;
+        }
+
+        try {
+          const response = await fetch(
+            "http://localhost:3000/update-password",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email, newPassword }),
+            }
+          );
+
+          const result = await response.json();
+          document.getElementById("change-password-message").textContent =
+            result.message;
+
+          if (result.success) {
+            setTimeout(() => {
+              window.location.href = "index.html";
+            }, 2000);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          document.getElementById("change-password-message").textContent =
+            "An error occurred. Please try again.";
+        }
+      });
+  </script>
+</body>
+
+</html>

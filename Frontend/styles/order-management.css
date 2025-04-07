@@ -1,0 +1,232 @@
+/* order-management.css */
+h1 {
+  font-size: 25px;
+  color: #333;
+  text-align: center; /* Center align the text */
+}
+
+/* Button styling */
+.button-container {
+  display: flex;
+  gap: 15px;
+  justify-content: left;
+  margin-left: 20px; /* Added gap on the left */
+}
+
+.button-container button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#allButton {
+  background-color: #ae005d; /* Green for Update orders */
+  color: white;
+}
+
+#allButton:hover {
+  background-color: #93004e; /* Darker green on hover */
+  transform: scale(1.05);
+}
+
+#reportButton {
+  background-color: #2196f3; /* Blue for See Reports */
+  color: white;
+}
+
+#reportButton:hover {
+  background-color: #1976d2; /* Darker blue on hover */
+  transform: scale(1.05);
+}
+
+/* Orders Table Styling */
+#orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  text-align: left;
+}
+
+#orders-table th,
+#orders-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center; /* Center align text for better readability */
+}
+
+#orders-table th {
+  background-color: #f4f4f9;
+  color: #333;
+  font-weight: bold;
+  white-space: nowrap; /* Prevent header text from wrapping */
+}
+
+#orders-table td {
+  white-space: nowrap; /* Prevent cell text from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+}
+
+#orders-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#orders-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.status-dropdown {
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.update-btn {
+  padding: 5px 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.update-btn:hover {
+  background-color: #45a049;
+}
+
+#delivered-orders-container,
+#cancelled-orders-container {
+  margin-top: 20px;
+}
+
+#delivered-orders-table,
+#cancelled-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#delivered-orders-table th,
+#cancelled-orders-table th,
+#delivered-orders-table td,
+#cancelled-orders-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#delivered-orders-table th,
+#cancelled-orders-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+#delivered-orders-container h2,
+#cancelled-orders-container h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Base styles */
+#orders-container,
+#delivered-orders-container,
+#cancelled-orders-container {
+  overflow-x: auto;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 1024px) {
+  .button-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+  }
+
+  table th,
+  table td {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .status-dropdown,
+  .tracking-input {
+    width: 100%;
+    min-width: 120px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+
+  table th,
+  table td {
+    padding: 6px;
+    font-size: 13px;
+  }
+
+  .status-dropdown,
+  .tracking-input {
+    min-width: 100px;
+  }
+
+  .update-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  table th,
+  table td {
+    padding: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .button-container {
+    flex-direction: row; /* Changed from column to row */
+    justify-content: center;
+    gap: 10px;
+    padding: 0 10px;
+  }
+
+  .button-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  h1,
+  h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+}

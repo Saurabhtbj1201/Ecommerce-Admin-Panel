@@ -1,0 +1,173 @@
+/* order-management.css */
+h1 {
+  font-size: 25px;
+  color: #333;
+  text-align: center; /* Center align the text */
+}
+/* Grid container styling */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted min width for better responsiveness */
+  gap: 15px; /* Reduced gap between order containers */
+  padding: 20px;
+  width: 100%; /* Ensure full width */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+/* Individual order container styling */
+.order-container {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #fdf2fc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Text styling inside the order container */
+.order-container p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #252525;
+}
+
+.order-container p strong {
+  color: #000;
+}
+
+/* Button styling */
+.button-container {
+  display: flex;
+  gap: 15px;
+  justify-content: left;
+  margin-left: 20px; /* Added gap on the left */
+}
+
+.button-container button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#updateButton {
+  background-color: #4caf50; /* Green for Update orders */
+  color: white;
+}
+
+#updateButton:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: scale(1.05);
+}
+
+#reportButton {
+  background-color: #2196f3; /* Blue for See Reports */
+  color: white;
+}
+
+#reportButton:hover {
+  background-color: #1976d2; /* Darker blue on hover */
+  transform: scale(1.05);
+}
+
+#exportButton {
+  background-color: #ff9800; /* Orange for Export Data */
+  color: white;
+}
+
+#exportButton:hover {
+  background-color: #fb8c00; /* Darker orange on hover */
+  transform: scale(1.05);
+}
+
+/* Category container styling */
+.category-container {
+  margin: 15px 0; /* Reduced margin */
+  padding: 10px;
+  border: 1px solid #b6b6b6;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.category-container h2 {
+  font-size: 20px;
+  color: #303030;
+  text-align: left;
+  margin-left: 30px;
+}
+
+/* Category container colors */
+#pendingOrders {
+  background-color: #fff3cd; /* Light yellow for Pending Orders */
+}
+
+#acceptedOrders {
+  background-color: #d4edda; /* Light green for Accepted Orders */
+}
+
+#transitOrders {
+  background-color: #d1ecf1; /* Light blue for Transit Orders */
+}
+
+#shippedOrders {
+  background-color: #cce5ff; /* Light sky blue for Shipped Orders */
+}
+
+#deliveredOrders {
+  background-color: #cdfdcf; /* Light gray for Delivered Orders */
+}
+
+#cancelledOrders {
+  background-color: #ffd3d7; /* Light red for Cancelled Orders */
+}
+
+/* Responsive design for mobile and tablets */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust grid for smaller screens */
+    gap: 10px; /* Reduce gap for smaller devices */
+  }
+
+  .button-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+  }
+
+  .button-container button {
+    flex: 1 1 auto; /* Allow buttons to adjust size dynamically */
+    max-width: 100px; /* Set a maximum width for buttons */
+    font-size: 11px;
+  }
+
+  h1 {
+    font-size: 20px; /* Reduce font size for smaller screens */
+  }
+
+  .category-container h2 {
+    font-size: 18px; /* Adjust heading size */
+  }
+
+  .order-container {
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+
+  .order-container p {
+    font-size: 12px; /* Adjust text size */
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-container {
+    grid-template-columns: 1fr; /* Single column for very small screens */
+    gap: 8px; /* Further reduce gap */
+  }
+}
