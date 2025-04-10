@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Panel</title>
   <link rel="stylesheet" href="./styles/login.css" />
-    <link rel="stylesheet" href="./styles/styles.css" />
+  <link rel="stylesheet" href="./styles/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  
 </head>
 
 <body style="background-image: url('./images/bg.jpg')">
@@ -35,6 +36,7 @@
         <div class="form-group">
           <input type="password" id="password" name="password" placeholder=" " required />
           <label for="password">Password</label>
+          <i class="fa fa-eye toggle-password" id="toggle-password"></i>
         </div>
 
         <button type="submit" id="login-button">Login</button>
@@ -93,6 +95,15 @@
     document.getElementById("show-login").addEventListener("click", function () {
       document.getElementById("reset-password-form-container").style.display = "none";
       document.getElementById("login-form-container").style.display = "block";
+    });
+
+    // Toggle password visibility for login password
+    document.getElementById("toggle-password").addEventListener("click", function () {
+      const passwordField = document.getElementById("password");
+      const type = passwordField.type === "password" ? "text" : "password";
+      passwordField.type = type;
+      this.classList.toggle("fa-eye-slash");
+      this.classList.toggle("fa-eye");
     });
 
     // Login form script

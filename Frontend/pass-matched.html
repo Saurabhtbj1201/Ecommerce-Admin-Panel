@@ -7,6 +7,7 @@
   <title>Admin Panel Login</title>
   <link rel="stylesheet" href="./styles/styles.css" />
   <link rel="stylesheet" href="./styles/pass-matched.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body style="background-image: url('./images/bg.jpg')">
@@ -33,10 +34,12 @@
       <div class="form-group">
         <input type="password" id="new-password" name="new-password" placeholder=" " required />
         <label for="new-password">Create New Password</label>
+        <i class="fa fa-eye toggle-password" id="toggle-new-password"></i>
       </div>
       <div class="form-group">
         <input type="password" id="confirm-password" name="confirm-password" placeholder=" " required />
         <label for="confirm-password">Confirm Password</label>
+        <i class="fa fa-eye toggle-password" id="toggle-confirm-password"></i>
       </div>
       <button type="submit" id="change-password-button">Submit</button>
       <button type="button" id="cancel-button" onclick="window.location.href='index.html'">
@@ -49,7 +52,8 @@
   <!-- Footer -->
   <footer>
     <p>
-      &copy Copyright under Emmanuel 2025. All rights reserved <a href="https://www.gu-saurabh.tech/" target="_blank" class="footer-link">
+      &copy Copyright under Emmanuel 2025. All rights reserved <a href="https://www.gu-saurabh.tech/" target="_blank"
+        class="footer-link">
         Saurabh Kumar</a>
     </p>
   </footer>
@@ -59,6 +63,24 @@
     if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
       window.location.href = "index.html";
     }
+
+    // Toggle password visibility for new password
+    document.getElementById("toggle-new-password").addEventListener("click", function () {
+      const passwordField = document.getElementById("new-password");
+      const type = passwordField.type === "password" ? "text" : "password";
+      passwordField.type = type;
+      this.classList.toggle("fa-eye-slash");
+      this.classList.toggle("fa-eye");
+    });
+
+    // Toggle password visibility for confirm password
+    document.getElementById("toggle-confirm-password").addEventListener("click", function () {
+      const passwordField = document.getElementById("confirm-password");
+      const type = passwordField.type === "password" ? "text" : "password";
+      passwordField.type = type;
+      this.classList.toggle("fa-eye-slash");
+      this.classList.toggle("fa-eye");
+    });
 
     // Fetch user data from query parameters or server
     const urlParams = new URLSearchParams(window.location.search);

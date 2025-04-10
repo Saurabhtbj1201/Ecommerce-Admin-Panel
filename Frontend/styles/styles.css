@@ -168,6 +168,21 @@ button:hover {
   background-color: #2980b9;
 }
 
+/* Toggle eye view Password Styles */
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 35%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #00000082;
+  font-size: 1.1em;
+}
+
+.toggle-password:hover {
+  color: #000000ae;
+}
+
 /* Footer Styles */
 footer {
   text-align: center;
