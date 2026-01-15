@@ -118,7 +118,7 @@ app.listen(port, () => {
 });
 
 const corsOptions = {
-  origin: "http://localhost:3000", // Replace with your frontend domain
+  origin: "https://main.dp7wscejbjmk.amplifyapp.com/", // Replace with your frontend domain
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"],
 };
